@@ -735,14 +735,15 @@ The batch size determines how many states should be processed at once, in order 
 \subsection{Pygame}
 This project contains games that are played by ANNs. Each of those games have been created in a way that makes it possible to play them \textit{headless}. Headless is a term that is commonly used in informatics to describe a system or program that runs without a graphical user interface (GUI or just UI). This for the simple reason, that an AI should be able to train without having to wait for the GUI to catch up. That way the AI can train as time efficiently as possible, resulting possibilities to train the ANNs on larger number of games. Nevertheless it is important to be able to see what an AI is doing. This can resolve errors more intuitively, also errors in the game logic. Additionally, it can show people that have never coded before in a non-abstract version, how the AI works. So for the graphical interface Pygame is a good choice. It is resource efficient in comparison to other options in Python and offers features such as key-presses, mouse position and mouse clicks. Although when comparing it to other non-Python interface builders, it's quite \textit{low-level}. This means that you only get the most basic commands, such as the ability to draw rectangles and circles with manual coordinates. Pygame acts on a frame-by-frame basis. Meaning you have to redraw your scene ever fraction of a second, for example 30 times/frames per second (30 fps). Motion has to be described in coordinates moving pixel by pixel every certain time step. Also when analysing mouse-presses you have to check whether or not the mouse is in a certain area or not. On the one hand this gets complicated very quickly, but on the other hand you get all possibilities without limitations. Pygame gives you the creative freedom to design everything the way you'd like it to be. \cite{PyGame}
 \section{Basic structure of code}
-\section{The model}
+Readability is an important factor of coding too. Therefore this project went with a object oriented layout of the code. This basically means that the data is structured in objects, for example in classes. This code has one class which is the model itself \lstinline{MyModel()} and \lstinline{DQN()}, those will be explained in more detail in section \ref{sec:TheModel}. Then there is the file \lstinline{games.py} in which every game has it's own class. Then there's \lstinline{train_dqn.py} and \lstinline{train_dqn_vs_dqn.py}, which both explain two training methods with a class each. This type of structure holds the advantage of having the possibility generalize code and easily switch out a game, or change the model. Additionally, it further improves readability.
+\section{The model}\label{sec:TheModel}
 \section{Games}
 In this section, the games used will be described in detail. As well as how the game was implemented into code and what the AI receives and outputs. All games use the same deep-q learning network, but just with different inputs, outputs, hidden layers and variables.
 \subsection{Tic-tac-toe}
 \subsubsection{Rules}
 Tic-tac-toe is a board game, in which two players can alternatingly make a move. Moving in this game means to place a cross or naught in one of the nine fields. Which symbol each player has to place, is predefined and unalterable for the ongoing game. A field which is taken by any of the two denotation can't be used anymore. In order to win a player has to get three of the own symbols in a row, horizontally, vertically or diagonally. The game is over if one of the players wins or all fields are occupied by a sign, which means the game ended in a tie.
 \subsubsection{Implementation}
-The idea is, that the whole game takes place in an array of nine elements, representing the nine fields of tic-tac-toe. There's a function \lstinline{step()} which you can call to advance the game one step further. This function has the parameter \lstinline{action}. The outer function first asks the user which action to take and then calls \lstinline{step(action)} with \lstinline{action} being the index of the field the player chose. Then the step function will check if the move is valid, if so it will set a one at the index. After that it will choose a random move for the second player if not 
+The idea is, that the whole game takes place in an array of nine elements, representing the nine fields of tic-tac-toe. There's a function \lstinline{step()} which you can call to advance the game one step further. This function has the parameter \lstinline{action}. The outer function first asks the user which action to take and then calls \lstinline{step(action)} with \lstinline{action} being the index of the field the player chose. Then the step function will check if the move is valid, if so it will set a one at the index. After that it will choose a random move until it is encounters a valid move for the second player, only if the game is not done yet. The algorithm will set the number two at the respective index. Then the step function will output winner, if there is any, if it's done and what the current state is (array of nine fields).
 \subsubsection{Interaction with the AI}
 \subsection{Snake}
 \subsubsection{Rules}
@@ -785,13 +786,33 @@ If the player pressed the left-key or right-key the position of the ship gets ju
 In the next step the shots are getting moved by doing the same procedure as with the player's movement. If the state is a six, which means the projectile belongs to the enemies, the shot gets moved one position down. If it is a five it gets moved one upwards. Additionally it gets checked if a bullet is going to hit any object. If so the bullet gets deleted and one life subtracted from the spacecraft. When all opponents are demolished new ones get generated.This by calling a function which returns the level by a decreasing chance with increasing level. This random enemy gets allocated to a random position if there is space for it. This step can be made infinitely many as long as the player has more than zero lives.   
 
 \subsubsection{Interaction with the AI}
+\section{Graphical User Interface}
+The GUI was implemented using pygame, when was structured object oriented. The most important variable for the functioning is \textit{self.currentScreenfunction}. It gets called multiple times per second and if the content gets changed the screen gets updated to the specified page. One way to change the screen functions is by using a button which has to be defined. The most screen functions are similar, thus the button example is representative for all the other ones. The following extract is a shortened version of the definition. All purely visual additions are excluded.
+\lstinline{updateFieldVariable()} function:
+\begin{lstlisting}[language=Python, caption=Example - Definition of the button function]
+    def addButton(self,x_center,y_center,w,h,action=None):
+        mouse = pygame.mouse.get_pos()
+        x = x_center - 0.5*w
+        y = y_center - 0.5*h
+
+        # Detect mouse hover
+        if y < mouse[1] < y+h and x < mouse[0] < x+w:
+            # Detect mouse press
+            if self.mouseDidPress and action != None:
+                if message == 'Previous': 
+                    self.page -=1
+                elif  message == 'Next':
+                    self.page +=1
+                elif message != 'Previous' and message != 'Next':
+                    self.currentScreenFunction = action
+                self.mouseDidPress = False
+\end{lstlisting}
+In the first line the name of the function is defined. The variables in the brackets have to plugged in in order to call the function without an error.  \textit{self} stands for the class, which is in this game pygame. It enables to use the properties defined by the class. The \textit{x\_center} and  \textit{y\_center} define where the button should be centered. The width and height are passed by the variables \textit{w} and  \textit{h}. The  \textit{action} allocates a specific function to the button. The \textit{None} enables to input nothing for this variable. If the function is called with just one variable less, than suggested in the definition, than the value of this variable will be None.In the variable \textit{mouse} the position of the cursor is saved. In the next step the x and y-positions get calculated in order to use the function \textit{pygame.rect}. This function draws a rectangle and require that the position is defined by the upper left corner, not in the center as the button function demands. The if-statement checks if the cursor is within the button. If this is the case,the mouse gets pressed and the action is not None, it looks what the content of the variable \textit{message} is. If the message is previous the \textit{self.page} variable gets subtracted by one. If its next one gets added. When both cases don't occur, the \textit{self.currentScreenfunction} is set to the action saved in this variable. Changing \textit{self.currentScreenFunction} to False prevents the button to be pressed multiple times before the action can be executed.
+
 \section{Results}
 \subsection{Tic-tac-toe}
 \subsection{Snake}
 \subsection{Space Invaders}
-\section{Graphical User Interface}
-The GUI was implemented using pygame, when was structured object oriented. The most important variable for the functioning is \textit{self.currentScreenfunction}. It gets called multiple times per second and if the content gets changed the screen gets updated to the specified page. The most screenfunctions are similar, thus the example is representative for all the other ones. In order to make interactive elements a specific function has to be defined separately.
-\section{Conclusion}
 \section{Glossary}
 
 \bibliographystyle{unsrt}
