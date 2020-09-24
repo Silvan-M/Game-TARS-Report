@@ -1,0 +1,802 @@
+\documentclass[12pt]{article}
+\usepackage{graphicx}
+\usepackage[english]{babel}
+\usepackage{url}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{subcaption}
+\usepackage{tikzscale}
+\usepackage{mwe}
+\usepackage{xcolor}
+\usepackage{tabu}
+\usepackage{mathtools}
+\usepackage{physics}
+\usepackage{amssymb}
+\usepackage{pgfplots}
+\usepackage{empheq}
+\usepackage{float}
+\usepackage[font={small,it}]{caption}
+\usepackage{tikz}
+\usetikzlibrary{decorations.pathreplacing}
+\usetikzlibrary{3d}
+\usepackage{cancel}
+\newcommand{\myparagraph}[1]{\paragraph{#1}\mbox{}\\}
+\usepackage{titlesec}
+\newcommand{\doubleCross}{%
+	\raisebox{-1pt}{%
+		\begin{tikzpicture}[scale = 3]%
+		\draw [->] (0, 0) -- (0.25, 0);                 
+		\draw [<-] (0, 0.1) -- (0.25, 0.1);     
+		\draw [black](0.25,0.15) -- (0,-0.05);  
+		\end{tikzpicture}
+	}
+}
+
+\pgfplotsset{compat=1.16}
+
+\newcommand{\singleCross}{%
+	\raisebox{-1pt}{%
+		\begin{tikzpicture}[scale = 3]%
+		\draw [<-] (0, 0) -- (0.25, 0);            
+		\draw [black](0.16,0.15) -- (0.08,0.05);   
+		\draw [->] (0, 0.1) -- (0.25, 0.1);       
+		\draw [black](0.16,0.05) -- (0.08,-0.05);   
+		\end{tikzpicture}
+	}
+}
+
+% Hyperlinks in contents
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
+% Make links look great again
+\urlstyle{same}
+
+% Silence hyperref warnings about math formulas in sections, make sure to include new characters used
+\pdfstringdefDisableCommands{%
+%  \def${}%
+  \def\alpha{alpha}%
+  \def\epsilon{epsilon}%
+  \def\gamma{gamma}%
+  \def\({}%
+  \def\){}%
+  \def\texttt#1{<#1>}%
+}
+
+\begin{document}
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+\definecolor{gray}{rgb}{0.4,0.4,0.4}
+\definecolor{darkblue}{rgb}{0.0,0.0,0.6}
+\definecolor{cyan}{rgb}{0.0,0.6,0.6}
+\definecolor{brightcerulean}{rgb}{0.11, 0.67, 0.84}
+
+\lstset{frame=tb,
+  backgroundcolor=\color{backcolour},   
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3
+}
+\begin{titlepage}
+    \centering
+    \includegraphics[width=1\textwidth]{pictures/title.pdf}\par\vspace{0.5cm}
+    {\scshape\LARGE Kantonsschule Wohlen \par}
+    \vspace{0.2cm}
+    {\scshape\Large Matura-project\par}
+    \vspace{2cm}
+    {\huge\bfseries Creating an AI which can play games\par}
+    \vspace{2cm}
+    {\Large\itshape Brian Funk und Silvan Metzker\par}
+    \vfill
+    directed by\par
+    Patric \textsc{Rousselot} und Mark \textsc{Heinz}
+    \vfill 
+    {10. September, 2020}
+\end{titlepage}
+\tableofcontents
+\newpage
+
+\section{Introduction}
+The goal of this project is to create an artificial intelligence (AI) which can play games. This is achieved by utilizing a practice called \textit{machine learning}. Machine learning is defined as a technique which can learn by using computational power. It's a generic term mainly used to describe AIs which learn by analysing huge amounts of data. 
+The most human-like strategy in machine learning is \textit{deep learning}. It's structure is similar to a human brain and does surprisingly well at mimicking the brain's abilities to learn. In this process we strive to better understand the complexity and functioning of an artificial human-like brain. 
+\section{Basics of Artificial Intelligence}
+\subsection{What is an AI}
+An Artificial Intelligence, in short AI, is the ability of a digital device to execute tasks which are related to human beings and animals. This vague description can be taken in many ways so a closer description would be a \textit{Narrow AI}. \cite{aibritannica}\\
+Artificial Narrow AI (ANI) is a type of AI which can only be applied to one narrow task. This is the kind of AI that currently exists. It can do a task very well, even better than humans. For example an AI that detects brain tumors way more accurately than a experienced neurosurgeon is expected to. It's revolutionary and does very well at one certain task, regardless it cannot tell the difference between a cat and a dog. This is considered as an Artifcial Narrow Intelligence. An Artificial General Intelligence (AGI) on the other hand is an AI that can perform all tasks a human can fulfil. This type of AI is not yet discovered. The step after that would be a Artificial Super Intelligence (ASI), this is the kind of AI that is superior in every way a human. It is also considered as the type of AI that could possibly lead to the extinction of the human race. The closest approach to one of those higher levels of a AI was achieved by one of the so called artificial neuronal networks (ANNs).
+\cite{narrowAI}
+\subsection{Mathematics behind a neuronal network}
+\subsubsection{Neuronal network}
+A model which is used for many self-learning applications is called \textit{neuronal network}. 
+This model mimics the human brain and tries to describe the learning-behaviour as accurate as possible. Although it has biological foundations it can be described in a purely mathematical way. To understand this certain terms have to be defined mathematically and linguistically.
+As in the brain a \textit{neuron} takes multiple inputs and passes forward an output, which is somehow dependant on the input. The human brain uses electric current to transfer information. The AI does this numerically. The inputs are multiplied by a certain factor. Later in the learning process these factors are the values that are going to be optimized and changed. By increasing or decreasing these values one node can have more or less impact. The neuron takes all the inputs and adds them together. This sum gets forwarded to the \textit{activation function}, which calculates the respective value. This transformed value gets weighted and gets passed to the output or to a new neuron in the next \textit{layer}. Two neurons can make a connection, which is used to pass the numerical outputs of the function into the next neuron. These neurons build up \textit{layers} and determine its size with the amount of neurons. One of the properties of the layer is, that all neurons from one layer don't connect to each other. But they do connect to the previous and subsequent layer. The layer can be categorized in three different kinds: input, output and hidden layers. The hidden layer describes all layers, except the in- and output layers. \cite{neuronal_network}\\
+\begin{figure}[H]
+\begin{center}
+
+\tikzset{every picture/.style={line width=0.75pt}} %set default line width to 0.75pt        
+
+\begin{tikzpicture}[x=0.75pt,y=0.75pt,yscale=-0.8,xscale=0.8]
+%uncomment if require: \path (0,300); %set diagram left start at 0, and has height of 300
+
+%Shape: Rectangle [id:dp5348683704419017] 
+\draw   (76.28,62) -- (122.66,62) -- (122.66,287) -- (76.28,287) -- cycle ;
+%Shape: Ellipse [id:dp939731478529126] 
+\draw   (76.28,88) .. controls (76.28,74.19) and (86.4,63) .. (98.88,63) .. controls (111.36,63) and (121.49,74.19) .. (121.49,88) .. controls (121.49,101.81) and (111.36,113) .. (98.88,113) .. controls (86.4,113) and (76.28,101.81) .. (76.28,88) -- cycle ;
+%Shape: Ellipse [id:dp5664589230881223] 
+\draw   (76.28,139) .. controls (76.28,125.19) and (86.4,114) .. (98.88,114) .. controls (111.36,114) and (121.49,125.19) .. (121.49,139) .. controls (121.49,152.81) and (111.36,164) .. (98.88,164) .. controls (86.4,164) and (76.28,152.81) .. (76.28,139) -- cycle ;
+
+%Shape: Ellipse [id:dp7228345414575519] 
+\draw   (76.28,190) .. controls (76.28,176.19) and (86.4,165) .. (98.88,165) .. controls (111.36,165) and (121.49,176.19) .. (121.49,190) .. controls (121.49,203.81) and (111.36,215) .. (98.88,215) .. controls (86.4,215) and (76.28,203.81) .. (76.28,190) -- cycle ;
+
+%Shape: Ellipse [id:dp6381471751303389] 
+\draw   (76.28,262) .. controls (76.28,248.19) and (86.4,237) .. (98.88,237) .. controls (111.36,237) and (121.49,248.19) .. (121.49,262) .. controls (121.49,275.81) and (111.36,287) .. (98.88,287) .. controls (86.4,287) and (76.28,275.81) .. (76.28,262) -- cycle ;
+
+%Straight Lines [id:da0033305459292130024] 
+\draw    (16.49,88) -- (71.47,88) ;
+\draw [shift={(74.47,88)}, rotate = 180] [fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.08]  [draw opacity=0] (8.93,-4.29) -- (0,0) -- (8.93,4.29) -- cycle    ;
+
+%Straight Lines [id:da5101048873615364] 
+\draw    (15.34,141) -- (71.47,141) ;
+\draw [shift={(74.47,141)}, rotate = 180] [fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.08]  [draw opacity=0] (8.93,-4.29) -- (0,0) -- (8.93,4.29) -- cycle    ;
+
+%Straight Lines [id:da6465200926879782] 
+\draw    (16.21,192) -- (71.47,192) ;
+\draw [shift={(74.47,192)}, rotate = 180] [fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.08]  [draw opacity=0] (8.93,-4.29) -- (0,0) -- (8.93,4.29) -- cycle    ;
+
+%Straight Lines [id:da5162655773532001] 
+\draw    (19.05,264) -- (71.47,264) ;
+\draw [shift={(74.47,264)}, rotate = 180] [fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.08]  [draw opacity=0] (8.93,-4.29) -- (0,0) -- (8.93,4.29) -- cycle    ;
+
+%Shape: Rectangle [id:dp18972253282167162] 
+\draw   (173.05,62) -- (247.44,62) -- (247.44,288) -- (173.05,288) -- cycle ;
+%Shape: Ellipse [id:dp7229152371524696] 
+\draw   (174.52,87.37) .. controls (174.52,73.53) and (190.94,62.3) .. (211.2,62.3) .. controls (231.46,62.3) and (247.88,73.53) .. (247.88,87.37) .. controls (247.88,101.22) and (231.46,112.45) .. (211.2,112.45) .. controls (190.94,112.45) and (174.52,101.22) .. (174.52,87.37) -- cycle ;
+%Shape: Ellipse [id:dp5195092025670933] 
+\draw   (174.08,138.68) .. controls (174.08,124.75) and (190.6,113.46) .. (210.98,113.46) .. controls (231.36,113.46) and (247.88,124.75) .. (247.88,138.68) .. controls (247.88,152.61) and (231.36,163.9) .. (210.98,163.9) .. controls (190.6,163.9) and (174.08,152.61) .. (174.08,138.68) -- cycle ;
+%Shape: Ellipse [id:dp45163062887236016] 
+\draw   (174.08,190.13) .. controls (174.08,176.2) and (190.6,164.91) .. (210.98,164.91) .. controls (231.36,164.91) and (247.88,176.2) .. (247.88,190.13) .. controls (247.88,204.06) and (231.36,215.36) .. (210.98,215.36) .. controls (190.6,215.36) and (174.08,204.06) .. (174.08,190.13) -- cycle ;
+%Shape: Ellipse [id:dp6104698680122025] 
+\draw   (174.08,262.78) .. controls (174.08,248.85) and (190.6,237.55) .. (210.98,237.55) .. controls (231.36,237.55) and (247.88,248.85) .. (247.88,262.78) .. controls (247.88,276.71) and (231.36,288) .. (210.98,288) .. controls (190.6,288) and (174.08,276.71) .. (174.08,262.78) -- cycle ;
+%Shape: Rectangle [id:dp3256666346119699] 
+\draw   (327.67,61.22) -- (402.96,61.22) -- (402.96,287.22) -- (327.67,287.22) -- cycle ;
+%Shape: Ellipse [id:dp5309517723311545] 
+\draw   (329.14,86.6) .. controls (329.14,72.75) and (345.56,61.53) .. (365.82,61.53) .. controls (386.07,61.53) and (402.49,72.75) .. (402.49,86.6) .. controls (402.49,100.44) and (386.07,111.67) .. (365.82,111.67) .. controls (345.56,111.67) and (329.14,100.44) .. (329.14,86.6) -- cycle ;
+%Shape: Ellipse [id:dp4644453089406313] 
+\draw   (328.7,137.9) .. controls (328.7,123.97) and (345.22,112.68) .. (365.6,112.68) .. controls (385.97,112.68) and (402.49,123.97) .. (402.49,137.9) .. controls (402.49,151.83) and (385.97,163.13) .. (365.6,163.13) .. controls (345.22,163.13) and (328.7,151.83) .. (328.7,137.9) -- cycle ;
+%Shape: Ellipse [id:dp8559292750865175] 
+\draw   (328.7,189.36) .. controls (328.7,175.43) and (345.22,164.13) .. (365.6,164.13) .. controls (385.97,164.13) and (402.49,175.43) .. (402.49,189.36) .. controls (402.49,203.29) and (385.97,214.58) .. (365.6,214.58) .. controls (345.22,214.58) and (328.7,203.29) .. (328.7,189.36) -- cycle ;
+%Shape: Ellipse [id:dp1970629242881392] 
+\draw   (328.7,262) .. controls (328.7,248.07) and (345.22,236.78) .. (365.6,236.78) .. controls (385.97,236.78) and (402.49,248.07) .. (402.49,262) .. controls (402.49,275.93) and (385.97,287.22) .. (365.6,287.22) .. controls (345.22,287.22) and (328.7,275.93) .. (328.7,262) -- cycle ;
+%Shape: Rectangle [id:dp7142888753284027] 
+\draw   (457.44,61.09) -- (508.19,61.09) -- (508.19,287) -- (457.44,287) -- cycle ;
+%Shape: Ellipse [id:dp7295760206982997] 
+\draw   (457.44,87.19) .. controls (457.44,73.33) and (468.51,62.09) .. (482.17,62.09) .. controls (495.83,62.09) and (506.9,73.33) .. (506.9,87.19) .. controls (506.9,101.05) and (495.83,112.29) .. (482.17,112.29) .. controls (468.51,112.29) and (457.44,101.05) .. (457.44,87.19) -- cycle ;
+%Shape: Ellipse [id:dp4100384195259268] 
+\draw   (457.44,138.4) .. controls (457.44,124.54) and (468.51,113.3) .. (482.17,113.3) .. controls (495.83,113.3) and (506.9,124.54) .. (506.9,138.4) .. controls (506.9,152.26) and (495.83,163.5) .. (482.17,163.5) .. controls (468.51,163.5) and (457.44,152.26) .. (457.44,138.4) -- cycle ;
+
+%Shape: Ellipse [id:dp7445535886007981] 
+\draw   (457.44,189.61) .. controls (457.44,175.74) and (468.51,164.5) .. (482.17,164.5) .. controls (495.83,164.5) and (506.9,175.74) .. (506.9,189.61) .. controls (506.9,203.47) and (495.83,214.71) .. (482.17,214.71) .. controls (468.51,214.71) and (457.44,203.47) .. (457.44,189.61) -- cycle ;
+
+%Shape: Ellipse [id:dp5696755418086674] 
+\draw   (457.44,261.9) .. controls (457.44,248.04) and (468.51,236.8) .. (482.17,236.8) .. controls (495.83,236.8) and (506.9,248.04) .. (506.9,261.9) .. controls (506.9,275.76) and (495.83,287) .. (482.17,287) .. controls (468.51,287) and (457.44,275.76) .. (457.44,261.9) -- cycle ;
+%Straight Lines [id:da18885212790099604] 
+\draw    (511.09,267) -- (566.07,267) ;
+\draw [shift={(569.07,267)}, rotate = 180] [fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.08]  [draw opacity=0] (8.93,-4.29) -- (0,0) -- (8.93,4.29) -- cycle    ;
+
+%Straight Lines [id:da35087841460038605] 
+\draw    (510.19,87) -- (565.16,87) ;
+\draw [shift={(568.16,87)}, rotate = 180] [fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.08]  [draw opacity=0] (8.93,-4.29) -- (0,0) -- (8.93,4.29) -- cycle    ;
+
+%Straight Lines [id:da5340215529143741] 
+\draw    (511.99,139) -- (566.97,139) ;
+\draw [shift={(569.97,139)}, rotate = 180] [fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.08]  [draw opacity=0] (8.93,-4.29) -- (0,0) -- (8.93,4.29) -- cycle    ;
+
+%Straight Lines [id:da6816101523134108] 
+\draw    (511.09,193) -- (566.07,193) ;
+\draw [shift={(569.07,193)}, rotate = 180] [fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.08]  [draw opacity=0] (8.93,-4.29) -- (0,0) -- (8.93,4.29) -- cycle    ;
+
+%Straight Lines [id:da07173699686933155] 
+\draw  [dash pattern={on 4.5pt off 4.5pt}]  (121.49,88) -- (174.08,263.78) ;
+%Straight Lines [id:da6699097779078262] 
+\draw  [dash pattern={on 4.5pt off 4.5pt}]  (121.49,262) -- (174.08,191.13) ;
+%Straight Lines [id:da1642802446958136] 
+\draw  [dash pattern={on 4.5pt off 4.5pt}]  (121.49,262) -- (174.08,139.68) ;
+%Straight Lines [id:da1882795920867577] 
+\draw  [dash pattern={on 4.5pt off 4.5pt}]  (121.49,262) -- (174.52,88.37) ;
+%Straight Lines [id:da21393539615592538] 
+\draw    (121.49,88) -- (174.52,88.37) ;
+%Straight Lines [id:da4487867895893247] 
+\draw    (121.49,88) -- (174.08,139.68) ;
+%Straight Lines [id:da07147649974582793] 
+\draw    (121.49,88) -- (174.08,191.13) ;
+%Straight Lines [id:da29330792079044166] 
+\draw    (121.49,139) -- (174.52,88.37) ;
+%Straight Lines [id:da49448158210002213] 
+\draw  [dash pattern={on 4.5pt off 4.5pt}]  (121.49,190) -- (174.08,262.78) ;
+%Straight Lines [id:da09798373867862575] 
+\draw    (121.49,139) -- (174.08,191.13) ;
+%Straight Lines [id:da5600404631656062] 
+\draw  [dash pattern={on 4.5pt off 4.5pt}]  (121.49,139) -- (174.08,263.78) ;
+%Straight Lines [id:da7057392759609711] 
+\draw    (121.49,190) -- (174.52,88.37) ;
+%Straight Lines [id:da2885366017727522] 
+\draw    (121.49,190) -- (174.08,139.68) ;
+%Straight Lines [id:da34302481014830266] 
+\draw    (121.49,190) -- (174.08,191.13) ;
+%Straight Lines [id:da3967598060261417] 
+\draw    (121.49,139) -- (174.08,139.68) ;
+%Straight Lines [id:da2561105605921401] 
+\draw    (121.49,88) -- (136.22,138) ;
+%Straight Lines [id:da0846780391827735] 
+\draw    (174.52,88.37) -- (157.92,142) ;
+%Straight Lines [id:da8561394015640085] 
+\draw    (174.08,139.68) -- (155.21,183) ;
+%Straight Lines [id:da7742955999004255] 
+\draw    (174.08,191.13) -- (157.02,215) ;
+%Straight Lines [id:da3741138292647084] 
+\draw    (121.49,139) -- (139.84,182) ;
+%Straight Lines [id:da19823177683211468] 
+\draw    (121.49,190) -- (136.22,210) ;
+%Straight Lines [id:da7799354395016436] 
+\draw  [dash pattern={on 4.5pt off 4.5pt}]  (247.88,87.37) -- (329.14,86.6) ;
+%Straight Lines [id:da8112635885919046] 
+\draw  [dash pattern={on 4.5pt off 4.5pt}]  (247.88,87.37) -- (328.7,137.9) ;
+%Straight Lines [id:da43416826759224025] 
+\draw  [dash pattern={on 4.5pt off 4.5pt}]  (247.88,87.37) -- (328.7,189.36) ;
+%Straight Lines [id:da5962912105851825] 
+\draw  [dash pattern={on 4.5pt off 4.5pt}]  (247.88,87.37) -- (328.7,262) ;
+%Straight Lines [id:da414758159631222] 
+\draw  [dash pattern={on 4.5pt off 4.5pt}]  (247.88,138.68) -- (328.7,137.9) ;
+%Straight Lines [id:da4655355837425297] 
+\draw  [dash pattern={on 4.5pt off 4.5pt}]  (247.88,138.68) -- (329.14,86.6) ;
+%Straight Lines [id:da19554879472652642] 
+\draw  [dash pattern={on 4.5pt off 4.5pt}]  (247.88,138.68) -- (328.7,189.36) ;
+%Straight Lines [id:da5323232176676549] 
+\draw  [dash pattern={on 4.5pt off 4.5pt}]  (247.88,138.68) -- (328.7,262) ;
+%Straight Lines [id:da6152630037551357] 
+\draw  [dash pattern={on 4.5pt off 4.5pt}]  (247.88,190.13) -- (329.14,86.6) ;
+%Straight Lines [id:da7928666915958094] 
+\draw  [dash pattern={on 4.5pt off 4.5pt}]  (247.88,190.13) -- (328.7,262) ;
+%Straight Lines [id:da37586727330985115] 
+\draw  [dash pattern={on 4.5pt off 4.5pt}]  (247.88,190.13) -- (328.7,189.36) ;
+%Straight Lines [id:da7715167325292387] 
+\draw  [dash pattern={on 4.5pt off 4.5pt}]  (247.88,262.78) -- (328.7,262) ;
+%Straight Lines [id:da8147553751065622] 
+\draw  [dash pattern={on 4.5pt off 4.5pt}]  (247.88,262.78) -- (328.7,189.36) ;
+%Straight Lines [id:da8607258541912663] 
+\draw  [dash pattern={on 4.5pt off 4.5pt}]  (247.88,262.78) -- (328.7,137.9) ;
+%Straight Lines [id:da4710290973854665] 
+\draw  [dash pattern={on 4.5pt off 4.5pt}]  (247.88,262.78) -- (329.14,86.6) ;
+%Shape: Rectangle [id:dp8707492920309927] 
+\draw  [draw opacity=0][fill={rgb, 255:red, 255; green, 255; blue, 255 }  ,fill opacity=1 ] (269.75,74.69) -- (306.82,74.69) -- (306.82,274.69) -- (269.75,274.69) -- cycle ;
+%Straight Lines [id:da789374598203767] 
+\draw  [dash pattern={on 4.5pt off 4.5pt}]  (402.86,87) -- (455.46,262.78) ;
+%Straight Lines [id:da5608607968941501] 
+\draw  [dash pattern={on 4.5pt off 4.5pt}]  (402.86,261) -- (455.46,190.13) ;
+%Straight Lines [id:da8173621393477881] 
+\draw  [dash pattern={on 4.5pt off 4.5pt}]  (402.86,261) -- (455.46,138.68) ;
+%Straight Lines [id:da42024579143459984] 
+\draw  [dash pattern={on 4.5pt off 4.5pt}]  (402.86,261) -- (455.9,87.37) ;
+%Straight Lines [id:da4970992533092691] 
+\draw    (402.86,87) -- (455.9,87.37) ;
+%Straight Lines [id:da5336499941942965] 
+\draw    (402.86,87) -- (455.46,138.68) ;
+%Straight Lines [id:da6837746318616225] 
+\draw    (402.86,87) -- (455.46,190.13) ;
+%Straight Lines [id:da2450666544795037] 
+\draw    (402.86,138) -- (455.9,87.37) ;
+%Straight Lines [id:da54432464900309] 
+\draw  [dash pattern={on 4.5pt off 4.5pt}]  (402.86,189) -- (455.46,261.78) ;
+%Straight Lines [id:da9110502437081351] 
+\draw    (402.86,138) -- (455.46,190.13) ;
+%Straight Lines [id:da18057385661891412] 
+\draw  [dash pattern={on 4.5pt off 4.5pt}]  (402.86,138) -- (455.46,262.78) ;
+%Straight Lines [id:da613380831677923] 
+\draw    (402.86,189) -- (455.9,87.37) ;
+%Straight Lines [id:da6296455944188728] 
+\draw    (402.86,189) -- (455.46,138.68) ;
+%Straight Lines [id:da11572374477508784] 
+\draw    (402.86,189) -- (455.46,190.13) ;
+%Straight Lines [id:da17311782425039035] 
+\draw    (402.86,138) -- (455.46,138.68) ;
+
+%Straight Lines [id:da6430113077352528] 
+\draw  [dash pattern={on 4.5pt off 4.5pt}]  (121.49,262) -- (174.52,262.37) ;
+%Straight Lines [id:da7394517258615123] 
+\draw  [dash pattern={on 4.5pt off 4.5pt}]  (404.4,261.52) -- (457.44,261.9) ;
+
+% Text Node
+\draw (570.06,193) node [anchor=west] [inner sep=0.75pt]   [align=left] {$\displaystyle o_{3}$};
+% Text Node
+\draw (570.96,139) node [anchor=west] [inner sep=0.75pt]   [align=left] {$\displaystyle o_{2}$};
+% Text Node
+\draw (569.16,87) node [anchor=west] [inner sep=0.75pt]   [align=left] {$\displaystyle o_{1}$};
+% Text Node
+\draw (569.87,267) node [anchor=west] [inner sep=0.75pt]   [align=left] {$\displaystyle o_{m}$};
+% Text Node
+\draw (482.17,189.61) node   [align=left] {$\displaystyle l_{out,\ 3}$};
+% Text Node
+\draw (482.17,138.4) node   [align=left] {$\displaystyle l_{out,\ 2}$};
+% Text Node
+\draw (22.03,264) node [anchor=east] [inner sep=0.75pt]   [align=left] {$\displaystyle i_{n}$};
+% Text Node
+\draw (18.72,192) node [anchor=east] [inner sep=0.75pt]   [align=left] {$\displaystyle i_{3}$};
+% Text Node
+\draw (17.78,141) node [anchor=east] [inner sep=0.75pt]   [align=left] {$\displaystyle i_{2}$};
+% Text Node
+\draw (19.02,88) node [anchor=east] [inner sep=0.75pt]   [align=left] {$\displaystyle i_{1}$};
+% Text Node
+\draw (98.88,262) node   [align=left] {$\displaystyle l_{in,\ n}$};
+% Text Node
+\draw (98.88,190) node   [align=left] {$\displaystyle l_{in,\ 3}$};
+% Text Node
+\draw (98.88,139) node   [align=left] {$\displaystyle l_{in,\ 2}$};
+% Text Node
+\draw (98.88,88) node   [align=left] {$\displaystyle l_{in,\ 1}$};
+% Text Node
+\draw (482.14,216.71) node [anchor=west] [inner sep=0.75pt]  [rotate=-91.1] [align=left] {...};
+% Text Node
+\draw (482.17,59.04) node [anchor=south] [inner sep=0.75pt]  [font=\footnotesize] [align=left] {output layer};
+% Text Node
+\draw (482.17,261.9) node   [align=left] {$\displaystyle l_{out,\ m}$};
+% Text Node
+\draw (482.17,87.19) node   [align=left] {$\displaystyle l_{out,\ 1}$};
+% Text Node
+\draw (365.6,86.45) node   [align=left] {$\displaystyle l_{hid,\ a,\ 1}$};
+% Text Node
+\draw (365.6,137.9) node   [align=left] {$\displaystyle l_{hid,\ a,\ 2}$};
+% Text Node
+\draw (365.6,189.36) node   [align=left] {$\displaystyle l_{hid,\ a,\ 3}$};
+% Text Node
+\draw (365.6,262) node   [align=left] {$\displaystyle l_{hid,\ b,\ s_{a}}$};
+% Text Node
+\draw (365.43,216.58) node [anchor=west] [inner sep=0.75pt]  [rotate=-90] [align=left] {...};
+% Text Node
+\draw (365.82,58.53) node [anchor=south] [inner sep=0.75pt]  [font=\footnotesize] [align=left] {a. hidden layer };
+% Text Node
+\draw (210.95,217.36) node [anchor=west] [inner sep=0.75pt]  [rotate=-91.1] [align=left] {...};
+% Text Node
+\draw (210.98,262.78) node   [align=left] {$\displaystyle l_{hid,\ 1,\ s_{1}}$};
+% Text Node
+\draw (210.98,190.13) node   [align=left] {$\displaystyle l_{hid,\ 1,\ 3}$};
+% Text Node
+\draw (210.98,138.68) node   [align=left] {$\displaystyle l_{hid,\ 1,\ 2}$};
+% Text Node
+\draw (210.98,87.22) node   [align=left] {$\displaystyle l_{hid,\ 1,\ 1}$};
+% Text Node
+\draw (211.2,59.3) node [anchor=south] [inner sep=0.75pt]  [font=\footnotesize] [align=left] {1. hidden layer };
+% Text Node
+\draw (588.55,221.66) node [anchor=north west][inner sep=0.75pt]  [rotate=-91.1] [align=left] {...};
+% Text Node
+\draw (23.42,223.66) node [anchor=north west][inner sep=0.75pt]  [rotate=-91.1] [align=left] {...};
+% Text Node
+\draw (98.85,217) node [anchor=west] [inner sep=0.75pt]  [rotate=-91.1] [align=left] {...};
+% Text Node
+\draw (98.88,60) node [anchor=south] [inner sep=0.75pt]  [font=\footnotesize] [align=left] {input layer};
+% Text Node
+\draw (288.51,86.99) node   [align=left] {...};
+% Text Node
+\draw (288.51,138.37) node   [align=left] {...};
+% Text Node
+\draw (288.29,189.75) node   [align=left] {...};
+% Text Node
+\draw (288.29,262.39) node   [align=left] {...};
+% Text Node
+\draw (288.29,226.07) node  [rotate=-90.15] [align=left] {...};
+
+
+\end{tikzpicture}
+
+
+\end{center}
+\caption{The relation between the different layers.}
+\label{neuronal_layer_relation}
+\end{figure}
+
+The neuronal network consists of all parts mentioned before, as it can be seen in figure \ref{neuronal_layer_relation}. The first layer is the input layer and has as many nodes, as the input size $n$. Which means if you want to forward binary information of four variables, the input size and therefore the input layer would be the size of four neurons. This also holds for the output layer size, which is denoted by $m$. 
+The amount of hidden layers $a$ and its size $s$ can be chosen arbitrarily. Although there are no constraints for the hidden layers, the amount and size can hugely affect the efficiency and capability to learn. Every circle or ellipse represents one neuron. 
+\begin{figure}[H]
+\begin{center}
+\label{neuron}
+\tikzset{every picture/.style={line width=0.75pt}} %set default line width to 0.75pt    
+\begin{tikzpicture}[x=0.75pt,y=0.75pt,yscale=-1,xscale=1]
+%uncomment if require: \path (0,300); %set diagram left start at 0, and has height of 300
+
+%Shape: Circle [id:dp8788298950890718] 
+\draw   (226,121.65) .. controls (226,98.65) and (244.65,80) .. (267.65,80) .. controls (290.65,80) and (309.3,98.65) .. (309.3,121.65) .. controls (309.3,144.65) and (290.65,163.3) .. (267.65,163.3) .. controls (244.65,163.3) and (226,144.65) .. (226,121.65) -- cycle ;
+%Straight Lines [id:da3838769529758834] 
+\draw    (124,101) -- (216.03,113.98) ;
+\draw [shift={(219,114.4)}, rotate = 188.03] [fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.08]  [draw opacity=0] (8.93,-4.29) -- (0,0) -- (8.93,4.29) -- cycle    ;
+%Straight Lines [id:da23619311043896896] 
+\draw    (124,141) -- (216.01,134.61) ;
+\draw [shift={(219,134.4)}, rotate = 536.03] [fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.08]  [draw opacity=0] (8.93,-4.29) -- (0,0) -- (8.93,4.29) -- cycle    ;
+%Straight Lines [id:da4533097231798262] 
+\draw    (124,181) -- (216.11,155.21) ;
+\draw [shift={(219,154.4)}, rotate = 524.36] [fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.08]  [draw opacity=0] (8.93,-4.29) -- (0,0) -- (8.93,4.29) -- cycle    ;
+%Straight Lines [id:da017364411003136793] 
+\draw    (124,61.4) -- (216.17,93.42) ;
+\draw [shift={(219,94.4)}, rotate = 199.16] [fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.08]  [draw opacity=0] (8.93,-4.29) -- (0,0) -- (8.93,4.29) -- cycle    ;
+%Straight Lines [id:da2738426817104591] 
+\draw    (309.3,121.65) -- (378.3,122.37) ;
+\draw [shift={(381.3,122.4)}, rotate = 180.6] [fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.08]  [draw opacity=0] (8.93,-4.29) -- (0,0) -- (8.93,4.29) -- cycle    ;
+%Shape: Rectangle [id:dp15584865208252952] 
+\draw   (380,105.4) -- (444.3,105.4) -- (444.3,143) -- (380,143) -- cycle ;
+%Straight Lines [id:da6312953564844079] 
+\draw    (446.3,122.65) -- (515.3,123.37) ;
+\draw [shift={(518.3,123.4)}, rotate = 180.6] [fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.08]  [draw opacity=0] (8.93,-4.29) -- (0,0) -- (8.93,4.29) -- cycle    ;
+
+% Text Node
+\draw (267.65,121.65) node   [align=left] {neuron};
+% Text Node
+\draw (122,61.4) node [anchor=east] [inner sep=0.75pt]   [align=left] {$\displaystyle i_{1}$};
+% Text Node
+\draw (122,141) node [anchor=east] [inner sep=0.75pt]   [align=left] {$\displaystyle i_{3}$};
+% Text Node
+\draw (122,101) node [anchor=east] [inner sep=0.75pt]   [align=left] {$\displaystyle i_{2}$};
+% Text Node
+\draw (122,181) node [anchor=east] [inner sep=0.75pt]   [align=left] {$\displaystyle i_{n}$};
+% Text Node
+\draw (124.63,153.66) node [anchor=north west][inner sep=0.75pt]  [rotate=-91.1] [align=left] {...};
+% Text Node
+\draw (152,48) node [anchor=north west][inner sep=0.75pt]   [align=left] {$\displaystyle w_{1}$};
+% Text Node
+\draw (151,82) node [anchor=north west][inner sep=0.75pt]   [align=left] {$\displaystyle w_{2}$};
+% Text Node
+\draw (150,146) node [anchor=north west][inner sep=0.75pt]   [align=left] {$\displaystyle w_{n}$};
+% Text Node
+\draw (150,116) node [anchor=north west][inner sep=0.75pt]   [align=left] {$\displaystyle w_{3}$};
+% Text Node
+\draw (415,123) node   [align=left] {f(x)};
+% Text Node
+\draw (468,102) node [anchor=north west][inner sep=0.75pt]   [align=left] {o};
+% Text Node
+\draw (328,102) node [anchor=north west][inner sep=0.75pt]   [align=left] {net};
+\end{tikzpicture}
+\caption{A visualization of a neuron.}
+\label{neuron_vis}
+\end{center}
+\end{figure}
+In figure \ref{neuron_vis} the structure of a neuron can be seen. The abbreviation $i$ stands for input, $w$ refers to weight and $o$ to the output of the neuron. The inputs and weights can be described in the form of a \textit{vector}. The output $o$ gets weighted accordingly and functions as input for the following neurons. Each component represents one input or weight. This yields the vectors $\vec{i}$ and $\vec{w}$.
+\begin{align}
+\vec{i} = \begin{pmatrix}
+i_{1}\\ 
+i_{2}\\ 
+\ldots \\ 
+i_{n}
+\end{pmatrix}
+&&
+\vec{w} = \begin{pmatrix}
+w_{1}\\ 
+w_{2}\\ 
+\ldots \\ 
+w_{n}
+\end{pmatrix}
+\label{def_vector}
+\end{align}
+The sum, in equation \ref{neuron_vis} referenced as net, is determined by the weighted summation of all the inputs. 
+\begin{equation}
+  \sum_{x = 1}^{n} i_{x} \cdot w_{x}  
+  \label{net_sum}
+\end{equation}
+The equation \ref{net_sum} shows the net value in the form of a sum.
+Due to the properties of the \textit{scalar product} this sum can be rewritten in the form of this vector operation
+\begin{equation}
+net = \vec{i} \cdot \vec{w}
+\label{net_scal}
+\end{equation}
+This weighted sum gets forwarded to the activation function. By replacing the net value with the definition stated in equation \ref{net_scal}  and $f(x)$ being the activation function, the output is defined as follows:
+\begin{equation}
+\begin{gathered}
+       o = f(net)\\
+    o = f(\vec{i} \cdot \vec{w}) 
+\end{gathered}
+\end{equation}
+The final output or an intermediate result of a hidden layer can be expressed in a vector form.
+\begin{equation}
+\begin{gathered}
+      \begin{pmatrix}
+o_{1}\\ 
+o_{2}\\ 
+...\\ 
+o_{m}
+\end{pmatrix} = \begin{pmatrix}
+f(net_{1})\\ 
+f(net_{2})\\ 
+...\\ 
+f(net_{m})
+\end{pmatrix}
+\end{gathered}
+\end{equation}
+As we have seen in formula \ref{net_scal} the net value can also be described in a vector form. By expanding the stated definition it can be formulated, such that multiple values are defined in one vector. Although it yields the same result, the output vector $\vec{o}$ can be calculated easier when using net values in a vector form.
+\begin{equation}
+    \begin{pmatrix}net_{1}\\ net_{2}\\ ...\\ net_{m}\end{pmatrix} =\begin{pmatrix}
+w_{1, 1} & w_{2, 1}  & ... &w_{n,1} \\ 
+w_{1, 2} & w_{2, 2} & ... & w_{n,2} \\ 
+... & ... &  ... & ...\\ 
+w_{1,s} & w_{2, s} & ...  & w_{n, s}
+\end{pmatrix} \cdot \begin{pmatrix}
+i_{1}\\ 
+i_{2}\\ 
+...\\
+i_{n}
+\end{pmatrix}
+\label{out_vector}
+\end{equation}
+The formula \ref{out_vector} is a stacked up version of equation \ref{net_scal}. Every row represents all the weights from one specific neuron.The output of this neuron is used as input in the next one. It acts as output as well as an input, but nevertheless it is denoted by $i$. A noticeable remark is, that it fits with the definition of the scalar product, which requires the dimension of the first vector to be the same as the dimension of the second vector. Which is the case as it can be seen. The letter $s$ denotes the size of the layer which the output gets calculated of.
+However there are different kinds of neurons depending on their activation functions. Depending on the context, different functions are more efficient to use. The most common and popular types of such are:  \cite{neuronal_network}
+\begin{figure}[H]\label{activation_function}
+\begin{minipage}[t]{0.5\textwidth}
+\begin{center}
+\textbf{Linear}
+\begin{equation}
+    f(x) = x
+\end{equation}\newline
+\begin{tikzpicture}[scale = 0.5]
+\begin{axis}[
+  axis x line=center,
+  axis y line=center,
+  xlabel={$x$},
+  ylabel={$y$},
+  xlabel style={below right},
+  ylabel style={above left},
+  xmin=-3,
+  xmax=3,
+  ymin=-3,
+  ymax=3]
+\addplot [mark=none,domain=-2.5:2.5] {x};
+\end{axis}
+\end{tikzpicture}\\
+Mostly used in input layers.
+\end{center}
+\end{minipage}
+\begin{minipage}[t]{0.5\textwidth}
+\begin{center}
+\textbf{Sigmoid}
+\begin{equation}
+    f(x) = \frac{1}{1 + e^{-x}}
+\end{equation}
+\begin{tikzpicture}[scale = 0.5]
+\begin{axis}[
+  axis x line=center,
+  axis y line=center,
+  xlabel={$x$},
+  ylabel={$y$},
+  xlabel style={below right},
+  ylabel style={above left},
+  xmin=-3.5,
+  xmax=3.5,
+  ymin=-3.5,
+  ymax=3.5]
+\addplot [mark=none,domain=-3:3] {1/(1+(e^-x))};
+\end{axis}
+\end{tikzpicture}\\
+Mostly used in hidden layers.
+\end{center}
+\end{minipage}
+
+\vspace{1cm}
+\begin{minipage}[t]{0.5\textwidth}
+\begin{center}
+\textbf{Rectified linear unit (ReLU)}
+\begin{equation}
+f(x) \left\{\begin{matrix}
+0 \text{ for } x \leq 0\\ 
+x \text{ for } x >  0
+\end{matrix}\right.
+\end{equation}
+\begin{tikzpicture}[scale = 0.5]
+\begin{axis}[
+  axis x line=center,
+  axis y line=center,
+  xlabel={$x$},
+  ylabel={$y$},
+  xlabel style={below right},
+  ylabel style={above left},
+  xmin=-3,
+  xmax=3,
+  ymin=-3,
+  ymax=3]
+\addplot [mark=none,domain=-2.5:0] {0};
+\addplot [mark=none,domain=0:2.5] {x};
+\end{axis}
+\end{tikzpicture}\\
+Mostly used in hidden layers.
+\end{center}
+\end{minipage}
+\begin{minipage}[t]{0.5\textwidth}
+\begin{center}
+\textbf{Binary step}
+\begin{equation}
+f(x) \left\{\begin{matrix}
+0 \text{ for } x < 0\\ 
+1 \text{ for } x \geq 0
+\end{matrix}\right.
+\end{equation}
+\begin{tikzpicture}[scale = 0.5]
+\begin{axis}[
+  axis x line=center,
+  axis y line=center,
+  xlabel={$x$},
+  ylabel={$y$},
+  xlabel style={below right},
+  ylabel style={above left},
+  xmin=-3,
+  xmax=3,
+  ymin=-3,
+  ymax=3]
+\addplot [mark=none,domain=-2.5:0] {0};
+\addplot [mark=none,domain=0:2.5] {1};
+\end{axis}
+\end{tikzpicture}\\
+Mostly used in output layers.
+\end{center}
+\end{minipage}
+\end{figure}
+The derivative of these functions are important in order to make a learning process possible. It is used for the \textit{back propagation}. Therefore the linear and binary step functions are not really used in the hidden layers.
+Although the  \textit{sigmoid neuron} is biological more plausible, the ReLU functions has shown to be more efficient than hidden layers.\cite{advantages_activation} 
+\subsubsection{Learning}
+In order to learn the neuronal network gets optimized by changing the weights $w$. To change this values appropriately, for the task given, a goal has to be set. This goal is important to calculate how much they actual output differs from the wanted results. It is denoted by $t$, which stands for \textit{target}. The neuronal network can be compared to a functions which assigns to $n$ inputs, $m$ outputs.
+\begin{equation}
+    f(x_{1},x_{2},x_{3},...,x_{n}) \rightarrow (y_{1},y_{2},y_{3},...,y_{m})
+\end{equation}
+With the data given the network compares the yielded output values to the target values by calculating the error. A similar formula is used to calculate the variance in statistics.
+\begin{equation}
+   E = \frac{1}{m}\sum_{i=1}^{m}\left ( y_{i}- t_{i} \right )^{2}
+\end{equation}
+To make backpropagation possible two of the three values, input, output and target, have to be constant. When the input vector $\vec{i}$ and the target $\vec{t}$ is fixed the only variable is $\vec{w}$. This can be used to analyze how much the output differs from the target for given weights. Reformulating yields a function which is only dependant on $\vec{w}$. By plugging this formula into the equation which assigns the numerical error it can be optimized to minimize the error. The function is denoted by:
+\begin{equation}
+E_{\;\vec{i}\;\vec{t}}(\vec{w})
+\end{equation}
+The optimization happens due to the adjustment of the weights. As a result of the dependency, the outputs change with them. Which means by changing $\vec{w}$ we can achieve an convergence or divergence with the target values.
+The function $E$ is multidimensional, that means in order to be optimized the $gradient$ descent has to be used. This function is denoted by $\triangledown$. The gradient of a more-dimensional function describes its steepest ascent. \cite{grad} \\ In this context the gradient always points in the direction where the error increases the most. This would lead to an divergence of the outputs and targets. So the negative gradient can be used to find the direction, in which the error decreases the fastest. Adding a multiple of the negative gradient and the old weights together, the resulting weights are ensured to be closer to the target value than the old one. But this only holds when the factor, which the gradient gets multiplied with, is not to large. In the worst case scenario the new $\vec{w}$ does not perform better, because it overshoots the optimal point. An other unlucky case would be if the greatest descent of the function would lead to a local minimum which is achieving worse results than other minima. This can be prevented by fully optimizing the function multiple times with random weights. In order to complete the learning process, the optimizing has to be executed repeatedly until the outputs approximate the targets sufficiently. Mathematically the step can be defined as follows:
+
+\begin{equation} \label{opt_func}
+    w_{new} = w_{old} - \alpha \cdot \triangledown E(w_{old})
+\end{equation}
+The constant $\alpha$ is called \textit{learning rate} and defines how fast this approximation should happen. By choosing a large value the trade-off for the time gained, is the diminishing accuracy. The target values can be calculated in different ways which have their own dis- and advantages. An AI which looks for patterns in pictures and has to state if the pictures shows something specific. The target then is defined by the data to be recognized, in our case an object. Therefore you would label all pictures accordingly to which object is seen on the picture. The neuronal network improves the ability to recognize this specific object or pattern with every picture shown, by comparing the actual label to the output of the neuronal network. An example would be that it should recognize a dog in a picture. The network gets all the pixels of the pictures and the labels as inputs. And should output dog or not a dog. By converting this label to a 0 for not a dog and 1 a dog the numerical value can be used as target value. By repeatedly showing pictures and making the optimization process stated in equation \ref{opt_func} the network recognises a dog increasingly better.
+The advantage of using neuronal networks instead of other algorithms can be the ability to generalize abstract information. To recognize patterns in data, that cannot be described mathematically. Although sometimes a machine learning approach can be unnecessary or inefficient. On the other hand, if the best possible non-machine learning algorithm is very hardware intensive, a machine learning approach might even be more efficient. Therefore it is an important point to evaluate, whether or not machine learning is more efficient or if it is necessary in the first place.
+\section{Reinforcement learning}
+\subsection{Introduction to Reinforcement learning}
+The concept of reinforcement learning (RL) is to record multiple attempts of any kind to later decide which resulted into the best possible outcome. The main idea is to map situations to actions. And then giving a positive reward if the action was beneficial or a negative reward if the action was  \cite{suttonreinforcement} \\
+For that reason at every attempt we record three main categories: 
+\begin{itemize}
+    \item State [$s$]
+    \item Action [$a$]
+    \item Reward [$r$]
+\end{itemize}
+If we take tic-tac-toe as an example, a \textit{state} would be the playing field. So in a programmatic approach you may take a list of nine elements representing nine fields. Each element then holds either a zero, one or two. A zero could stand for an empty field, one would be a cross and two a cross. This list of nine elements would then define a state. \\
+An \textit{action} in this case could be a number between zero and eight, representing the index of in which field is to be placed the next symbol.\\
+But the AI is missing one crucial part to learn successfully, feedback. Feedback in RL is given as a \textit{reward} of an action. It completes the thought behind Reinforcement learning. It's like training a dog, if it does well you give it a reward in form of tasty treats. The same principle applies to RL, if the actor plays well and for example scores three in a row in tic-tac-toe, you give the agent a reward of 100 points. You can take this concept one step further and penalize the actor with -100 points if it looses. The principle of reinforcement learning then is to use the collected data and process it in a way to form a strategy. The strategy in RL is called \textit{policy}. It's a function that calculates the most beneficial action given a state [$s$]. \cite{rl_tictactoe} \\
+This strategy can only work well if the actor is able to take action that affect the state. In addition, the state should relate to the goal in any way. If the problem can be expressed in a so-called \textit{Markov decision process}, as sensation, action, and goal, the problem is suitable for a RL approach.
+\cite{suttonreinforcement} \\
+There are different approaches to reinforcement learning. One can use a probabilistic method to calculate the best suitable action. Or one could calculate all possibilities if they are finite. These methods try to approach the policy. In this case, a deep learning algorithm was used to approximate the policy. For more details continue to the next chapter.
+\cite{rl_overview}
+
+\subsection{Deep Q-networks (DQNs)}
+\subsubsection{Introduction to Q-learning}
+To first understand how Deep Q-learning works, one needs to understand the principles of \textit{Q-learning}.\\
+Q-learning is a RL algorithm which is operating \textit{off-policy}. This means that the RL algorithm learns from actions which are outside of it's policy. The 'Q' stands for 'quality', which in this context means how beneficial a action is in obtaining some future reward. The Q-learning algorithm is trying to learn a policy which maximises rewards. At the beginning the Q-learning algorithm will be taking random action, this is called \textit{exploration}. This holds the purpose of increasing the variety of experience the agent encounters. The opposite of exploration is \textit{exploitation} it is considered as taking the most beneficial action. The most beneficial action is called a \textit{greedy action}. \cite{rl_q-learning} \\
+\begin{figure}
+\[NewQ(s,a) = Q(s, a) + \alpha * [R(s, a) + \gamma * maxQ'(s', a') - Q(s, a)]\]
+\caption{Bellman Equation}
+\label{BellmanEqu}
+\end{figure}
+The greedy action is selected using a \textit{Q-table}. It is a table with all actions separated into columns and all possible states as rows. For each state-action pair a expected future reward will be listed. Each of those values can be calculated using a bellman equation (fig. \ref{BellmanEqu}). Those values are referred to as the \textit{q-values} and represent how favorable an action is. The bellman equation will be explained in closer detail in the next chapters.  \cite{rl_q-table} 
+
+\subsubsection{Applying the basics of deep learning}
+Deep Q-learning is fundamentally the same as Q-learning. But instead of a Q-table representing the policy, a deep learning AI strives to approximate the perfect policy. But what remains is the bellman equation (fig. \ref{BellmanEqu}). The bellman equation shows how q-values are updated. In the same way as a Q-table, the deep q-learning agent has it's own memory. It is filled up to a certain value and if it exceeds the value, the program will remove older values to make room for the new memories. From that memory in certain steps, the deep learning algorithm will take random values and check for the optimal value of the new state [$s'$] and the new reward [$r'$] it could have taken. Then it weighs this value with gamma [$\gamma$] the variable for future reward. And subtracts it from the Reward. \cite{bellmanEquValue}
+\[Q(s,a) = R(s,a) - \gamma\cdot Q(s',a')\]
+This value will get subtracted by the actual Q-values it predicts. Which will then get inserted into the machine learning algorithm, in our case TensorFlow. There it will be weighted by the learning rate [$\alpha$]. Gamma and alpha as well as all the other are important variables for deep Q-learning are described more comprehensively in section \ref{sec:variables}.
+
+\section{Implementation of machine learning and user interface}
+\subsection{Python}
+The first decision when approaching such a project, is which programming language to use. In this case Python was the favorable choice, because of the familiarity to the language. It's a simple language, yet a powerful tool. Python is considered best practice in scientific applications. All that whilst being one of the most popular language, yielding many results for a wide variety of problems. That's why Python was used for this project. \cite{Python}
+\subsection{TensorFlow}
+The second decision one has to take for such a project, is which machine learning framework to use. TensorFlow is an end-to-end open source platform for machine learning. It was developed by the Google Brain Team. Today it's considered as one of the most important machine learning frameworks. It works in many programming languages including Python. TensorFlow allows a relatively simple implementation of machine learning. \cite{Tensorflow}\cite{TensorFlowWikipedia}\\
+In this project the focus was laid on TensorFlow 2, the second version of TensorFlow. Therefore a basis of any TensorFlow 2 code was required. The basic example of a TensorFlow model is \textit{CartPole}. It can be described as an environment containing a Cart which moves along a frictionless track. A pole which stands upright at first is attached via a joint to the cart. The machine learning algorithm should then balance this joint by moving the cart. This project used such an example by Siwei Xu as basis of the TensorFlow implementation. Subsequently this example was adapted to our own use.
+\cite{ourDqnModelBasis}
+\subsection{Variables} \label{sec:variables}
+\subsubsection{Gamma [\(\gamma\)]}
+Gamma determines the importance of future rewards by multiplying them with a constant numerical factor from 0 to 1. The product is added to the reward in order to make it numerically more gaining, to plan for the future.
+
+\subsubsection{Epsilon [\(\epsilon\)] and Decay}
+Epsilon determines the exploration rate with a numerical value from 0 to 1. If a random number in the same interval is smaller, the Agent will take random action, otherwise the choice that the AI consideres as optimal, the so-called \textit{greedy choice}, will be chosen. This value gets continuously decreased over time by a constant decay-factor and thus making the chance smaller to take random actions increasing with time. The randomness is used to ensure diversity of the first few decisions. This does not guarantee that the network will find the most efficient strategy but it decreases the likelyhood of repeatedly choosing a relatively good tactic, which is in comparison with other efficient ways worse.
+
+\subsubsection{Number of Episodes [\(N\)]}
+$N$ determines the amount of games which are used to train the AI.
+
+\subsubsection{Alpha [\(\alpha\)]}
+Alpha determines how drastically the weights in the neuronal network get changed. This by multiplying the optimizing change by the constant factor alpha. The weights get changed in order to minimize the loss function.
+
+\subsubsection{Experience and Copy Step}
+The experience of a DQN model is like in a human brain the memory of events. Our DQN model saves the state, taken action, reward, the new state and if the game is done (and therefore the last step). There are two variables min experience and max experience. The min experience variable defines how many events it must have saved, that it actually processes the inputs. Max experience defines how many events are getting saved in total until it starts deleting the oldest one while adding a new one. 
+This DQN actually consists of two seperate neuronal networks. Firstly the TrainNet (Train Network), the network that is the most up-to-date and decides which actions to take. The other one is called TargetNet (Target Network), it’s meant for training purposes only. This network is structurally identical to the TrainNet. It will be periodically updated every certain step. Copy step defines the frequency of these updates. The purpose of the TargetNet is to avoid abrupt changes of strategy. 
+
+\subsubsection{Batch Size}
+The batch size determines how many states should be processed at once, in order to detect movement. 
+
+\subsection{Pygame}
+This project contains games that are played by ANNs. Each of those games have been created in a way that makes it possible to play them \textit{headless}. Headless is a term that is commonly used in informatics to describe a system or program that runs without a graphical user interface (GUI or just UI). This for the simple reason, that an AI should be able to train without having to wait for the GUI to catch up. That way the AI can train as time efficiently as possible, resulting possibilities to train the ANNs on larger number of games. Nevertheless it is important to be able to see what an AI is doing. This can resolve errors more intuitively, also errors in the game logic. Additionally, it can show people that have never coded before in a non-abstract version, how the AI works. So for the graphical interface Pygame is a good choice. It is resource efficient in comparison to other options in Python and offers features such as key-presses, mouse position and mouse clicks. Although when comparing it to other non-Python interface builders, it's quite \textit{low-level}. This means that you only get the most basic commands, such as the ability to draw rectangles and circles with manual coordinates. Pygame acts on a frame-by-frame basis. Meaning you have to redraw your scene ever fraction of a second, for example 30 times/frames per second (30 fps). Motion has to be described in coordinates moving pixel by pixel every certain time step. Also when analysing mouse-presses you have to check whether or not the mouse is in a certain area or not. On the one hand this gets complicated very quickly, but on the other hand you get all possibilities without limitations. Pygame gives you the creative freedom to design everything the way you'd like it to be. \cite{PyGame}
+\section{Basic structure of code}
+\section{The model}
+\section{Games}
+In this section, the games used will be described in detail. As well as how the game was implemented into code and what the AI receives and outputs. All games use the same deep-q learning network, but just with different inputs, outputs, hidden layers and variables.
+\subsection{Tic-tac-toe}
+\subsubsection{Rules}
+Tic-tac-toe is a board game, in which two players can alternatingly make a move. Moving in this game means to place a cross or naught in one of the nine fields. Which symbol each player has to place, is predefined and unalterable for the ongoing game. A field which is taken by any of the two denotation can't be used anymore. In order to win a player has to get three of the own symbols in a row, horizontally, vertically or diagonally. The game is over if one of the players wins or all fields are occupied by a sign, which means the game ended in a tie.
+\subsubsection{Implementation}
+The idea is, that the whole game takes place in an array of nine elements, representing the nine fields of tic-tac-toe. There's a function \lstinline{step()} which you can call to advance the game one step further. This function has the parameter \lstinline{action}. The outer function first asks the user which action to take and then calls \lstinline{step(action)} with \lstinline{action} being the index of the field the player chose. Then the step function will check if the move is valid, if so it will set a one at the index. After that it will choose a random move for the second player if not 
+\subsubsection{Interaction with the AI}
+\subsection{Snake}
+\subsubsection{Rules}
+Snake is a single-player game, in which the player pilots a snake in a field with four walls. The field size in this case can be varied accordingly, but is usually set to a 20x20 grid. The goal is to survive as long as possible and gain length by eating randomly occurring apples. The game is over, if the player controls the snake in such a way, that it collides with itself or one of the borders of the game. There are certain versions which allow the transform this game in a multiplayer one. The same rules apply but one can also lose by colliding with the other snake.
+\subsubsection{Implementation}
+The implementation is quite simple. The game consists of a 20x20 grid, so what happens first, is that the apple gets placed randomly by selecting a value between zero and 400, not including 400. This is then saved as the index of the apple. Every pixel of the snake is saved as it's index in a array. There's no need to save the whole field of the snake as an array for game logic but it's necessary to display it afterwards. This is getting handled by the \lstinline{updateFieldVariable()} function:
+\begin{lstlisting}[language=Python, caption=Example - Create a snake field every second of size \lstinline{self.field_size}]
+    def updateFieldVariable(self):
+        # Create empty field of field_size
+        self.field = [0]*(self.field_size**2)
+
+        # Create apple
+        self.field[self.apple] = 2
+        
+        # Create snake
+        for i in self.snake:
+            self.field[i] = 1
+\end{lstlisting}
+So after each step a one-dimensional array with 400 zeros gets saved as \lstinline{self.field}. The apple then gets set at index \lstinline{self.apple}, which is represented as the number two. Then the array with the indices of the snake (\lstinline{self.snake}) gets iterated and at every index of snake, the field gets set to one representing the snakes body. Also after each step an action is read. This action then gets evaluated by checking if the snake is directly surrounding an object. If the snake heads in this direction, the game will be ended. If the snakes index of the head (last element of \lstinline{self.snake}) is equal to the index of the apple, no element gets deleted. Otherwise the first element gets deleted (last part of snake). Additionally, the index of the field where the snake is heading, is added to the list. This process runs until the player dies.
+\subsubsection{Interaction with the AI}
+TBD
+\subsection{Space Invaders}
+\subsubsection{Rules}
+Space invaders is the most complicated game of the three implemented. As in snake it's a single player game in which the player has to survive as long as possible. The competitor now controls a ship, which can move right and left. It also has the ability to fire upwards. The enemies are other spaceships which try to shoot the players ship. They have the same limitation, which means they can just move right, move left and fire downwards. There are many different versions, though in the following wording the implemented version is described. This adaptation is slightly simplified in order to make the implementation easier. Every shot costs an object one life, when it gets hit by the shot. The enemy spacecraft have one heart and the ship, which the players controls, three hearts. They come in three different levels and for every increase of level the chance of spawning gets smaller. Though the possibility of firing gets increased with the levels. When all the enemies are destroyed new one will be generated. The game is over when the player's ship gets demolished.
+\subsubsection{Implementation}
+As in the other games the essential data is saved in a matrix. Every element of it has a numerical value in the range from 0 to 9. Every number define the most important state as follows:
+\begin{itemize}
+\item[0] nothing
+\item[1] player's ship
+\item[2] enemy level 1
+\item[3] enemy level 2
+\item[4] enemy level 3
+\item[5] player's bullet
+\item[6] enemy's bullet
+\item[8] air
+\item[9] markers
+\end{itemize}
+The shapes of the objects are separately stored in matrices with the numbers listed before. A function sets different objects in the matrix at a certain position. This function is used to move object by calling it and passing on the position and the object. The center of every matrix is set to permanently to nine. This marks the center. In every processing step all the elements of the matrix are scanned for the nine. If one is found the position will be saved in a list. The next step is to identify what object the marker belongs to by looking around the marker for the numbers one to eight. The positions get assigned to a state and stored in three different lists, saving in the first the player, in the second the enemies and in the third the shots. All elements of the matrix get replaced by zero to reset it. Now depending on the input different actions get executed.
+If the player pressed the left-key or right-key the position of the ship gets just shifted left respectively right, if the field allows it.This by calling the function and adding or subtracting a certain value.If the move is not allowed this step gets skipped leaving the ship at the same position as before. If no movement is triggered the player can fire. Again the function is called and sets a players' bullet above the position of the competitor.
+In the next step the shots are getting moved by doing the same procedure as with the player's movement. If the state is a six, which means the projectile belongs to the enemies, the shot gets moved one position down. If it is a five it gets moved one upwards. Additionally it gets checked if a bullet is going to hit any object. If so the bullet gets deleted and one life subtracted from the spacecraft. When all opponents are demolished new ones get generated.This by calling a function which returns the level by a decreasing chance with increasing level. This random enemy gets allocated to a random position if there is space for it. This step can be made infinitely many as long as the player has more than zero lives.   
+
+\subsubsection{Interaction with the AI}
+\section{Results}
+\subsection{Tic-tac-toe}
+\subsection{Snake}
+\subsection{Space Invaders}
+\section{Graphical User Interface}
+The GUI was implemented using pygame, when was structured object oriented. The most important variable for the functioning is \textit{self.currentScreenfunction}. It gets called multiple times per second and if the content gets changed the screen gets updated to the specified page. The most screenfunctions are similar, thus the example is representative for all the other ones. In order to make interactive elements a specific function has to be defined separately.
+\section{Conclusion}
+\section{Glossary}
+
+\bibliographystyle{unsrt}
+\newpage
+\bibliography{main}
+\listoffigures
+
+\end{document}
