@@ -15,6 +15,7 @@
 \usepackage{pgfplots}
 \usepackage{empheq}
 \usepackage{float}
+\usepackage[toc,section=section]{glossaries}
 \usepackage[font={small,it}]{caption}
 \usepackage{tikz}
 \usetikzlibrary{decorations.pathreplacing}
@@ -22,6 +23,8 @@
 \usepackage{cancel}
 \newcommand{\myparagraph}[1]{\paragraph{#1}\mbox{}\\}
 \usepackage{titlesec}
+\usepackage[utf8]{inputenc}
+\pagestyle{headings}
 \newcommand{\doubleCross}{%
 	\raisebox{-1pt}{%
 		\begin{tikzpicture}[scale = 3]%
@@ -67,6 +70,21 @@
   \def\){}%
   \def\texttt#1{<#1>}%
 }
+
+% Glossary settings
+% Set first occurency to italics 
+\defglsentryfmt{%
+  \ifglsused{\glslabel}{%
+    \glsgenentryfmt%
+  }{%
+    % Typeset first use
+    \textit{\glsgenentryfmt}%
+  }%
+}
+\makeglossaries
+\loadglsentries{glossaries}
+\glsenablehyper
+\glsresetall
 
 \begin{document}
 
@@ -115,18 +133,18 @@
 \newpage
 
 \section{Introduction}
-The goal of this project is to create an artificial intelligence (AI) which can play games. This is achieved by utilizing a practice called \textit{machine learning}. Machine learning is defined as a technique which can learn by using computational power. It's a generic term mainly used to describe AIs which learn by analysing huge amounts of data. 
-The most human-like strategy in machine learning is \textit{deep learning}. It's structure is similar to a human brain and does surprisingly well at mimicking the brain's abilities to learn. In this process we strive to better understand the complexity and functioning of an artificial human-like brain. 
+The goal of this project is to create an \gls{Artificial Intelligence} (\gls{AI}) which can play games. This is achieved by utilizing a practice called \gls{machine learning}. \Gls{machine learning} is defined as a technique which can learn by using computational power. It's a generic term mainly used to describe \gls{AI}s which learn by analysing huge amounts of data. 
+The most human-like strategy in \gls{machine learning} is \gls{deep learning}. It's structure is similar to a human brain and does surprisingly well at mimicking the brain's abilities to learn. In this process we strive to better understand the complexity and functioning of an artificial human-like brain. 
 \section{Basics of Artificial Intelligence}
 \subsection{What is an AI}
-An Artificial Intelligence, in short AI, is the ability of a digital device to execute tasks which are related to human beings and animals. This vague description can be taken in many ways so a closer description would be a \textit{Narrow AI}. \cite{aibritannica}\\
-Artificial Narrow AI (ANI) is a type of AI which can only be applied to one narrow task. This is the kind of AI that currently exists. It can do a task very well, even better than humans. For example an AI that detects brain tumors way more accurately than a experienced neurosurgeon is expected to. It's revolutionary and does very well at one certain task, regardless it cannot tell the difference between a cat and a dog. This is considered as an Artifcial Narrow Intelligence. An Artificial General Intelligence (AGI) on the other hand is an AI that can perform all tasks a human can fulfil. This type of AI is not yet discovered. The step after that would be a Artificial Super Intelligence (ASI), this is the kind of AI that is superior in every way a human. It is also considered as the type of AI that could possibly lead to the extinction of the human race. The closest approach to one of those higher levels of a AI was achieved by one of the so called artificial neuronal networks (ANNs).
+An \gls{Artificial Intelligence}, in short \gls{AI}, is the ability of a digital device to execute tasks which are related to human beings and animals. This vague description can be taken in many ways so a closer description would be a \gls{Narrow AI}. \cite{aibritannica}\\
+Artificial \gls{Narrow AI} (ANI) is a type of \gls{AI} which can only be applied to one narrow task. This is the kind of \gls{AI} that currently exists. It can do a task very well, even better than humans. For example an \gls{AI} that detects brain tumors way more accurately than a experienced neurosurgeon is expected to. It's revolutionary and does very well at one certain task, regardless it cannot tell the difference between a cat and a dog. This is considered as an Artifcial Narrow Intelligence. An Artificial General Intelligence (AGI) on the other hand is an\gls{AI} that can perform all tasks a human can fulfil. This type of \gls{AI} is not yet discovered. The step after that would be a Artificial Super Intelligence (ASI), this is the kind of \gls{AI} that is superior in every way a human. It is also considered as the type of \gls{AI} that could possibly lead to the extinction of the human race. The closest approach to one of those higher levels of a \gls{AI} was achieved by one of the so called artificial \glspl{neuronal network} (\glspl{ANN}).
 \cite{narrowAI}
 \subsection{Mathematics behind a neuronal network}
 \subsubsection{Neuronal network}\label{sec:nnmath}
-A model which is used for many self-learning applications is called \textit{neuronal network}. 
+A model which is used for many self-learning applications is called \gls{neuronal network}. 
 This model mimics the human brain and tries to describe the learning-behaviour as accurate as possible. Although it has biological foundations it can be described in a purely mathematical way. To understand this certain terms have to be defined mathematically and linguistically.
-As in the brain a \textit{neuron} takes multiple inputs and passes forward an output, which is somehow dependant on the input. The human brain uses electric current to transfer information. The AI does this numerically. The inputs are multiplied by a certain factor. Later in the learning process these factors are the values that are going to be optimized and changed. By increasing or decreasing these values one node can have more or less impact. The neuron takes all the inputs and adds them together. This sum gets forwarded to the \textit{activation function}, which calculates the respective value. This transformed value gets weighted and gets passed to the output or to a new neuron in the next \textit{layer}. Two neurons can make a connection, which is used to pass the numerical outputs of the function into the next neuron. These neurons build up \textit{layers} and determine its size with the amount of neurons. One of the properties of the layer is, that all neurons from one layer don't connect to each other. But they do connect to the previous and subsequent layer. The layer can be categorized in three different kinds: input, output and hidden layers. The hidden layer describes all layers, except the in- and output layers. \cite{neuronal_network}\\
+As in the brain a \gls{neuron} takes multiple  \glspl{input} and passes forward an output, which is somehow dependant on the  \gls{input}. The human brain uses electric current to transfer information. The \gls{AI} does this numerically. The \glspl{input} are multiplied by a certain factor. Later in the learning process these factors are the values that are going to be optimized and changed. By increasing or decreasing these values one node can have more or less impact. The \gls{neuron} takes all the \glspl{input} and adds them together. This sum gets forwarded to the \gls{activation function}, which calculates the respective value. This transformed value gets weighted and gets passed to the output or to a new \gls{neuron} in the next \gls{layer}. Two \glspl{neuron} can make a connection, which is used to pass the numerical \glspl{output} of the function into the next neuron. These \glspl{neuron} build up \glspl{layer} and determine its size with the amount of \glspl{neuron}. One of the properties of the   \glspl{layer} is, that all \glspl{neuron} from one  \glspl{layer} don't connect to each other. But they do connect to the previous and subsequent  \glspl{layer}. The \glspl{layer} can be categorized in three different kinds:  \gls{input}, output and \glspl{hidden layer}. The hidden \glspl{layer} describes all layers, except the in- and  \glspl{output layer}. \cite{neuronal_network}\\
 \begin{figure}[H]
 \begin{center}
 
@@ -410,8 +428,8 @@ As in the brain a \textit{neuron} takes multiple inputs and passes forward an ou
 \label{neuronal_layer_relation}
 \end{figure}
 
-The neuronal network consists of all parts mentioned before, as it can be seen in figure \ref{neuronal_layer_relation}. The first layer is the input layer and has as many nodes, as the input size $n$. Which means if you want to forward binary information of four variables, the input size and therefore the input layer would be the size of four neurons. This also holds for the output layer size, which is denoted by $m$. 
-The amount of hidden layers $a$ and its size $s$ can be chosen arbitrarily. Although there are no constraints for the hidden layers, the amount and size can hugely affect the efficiency and capability to learn. Every circle or ellipse represents one neuron. 
+The \gls{neuronal network} consists of all parts mentioned before, as it can be seen in figure \ref{neuronal_layer_relation}. The first  \gls{layer} is the \gls{input layer} and has as many nodes, as the \gls{input size} $n$. Which means if you want to forward binary information of four variables, the  \gls{input} size and therefore the \gls{input layer} would be the size of four \glspl{neuron}. This also holds for the \gls{output layer size}, which is denoted by $m$. 
+The \gls{amount of hidden layers} $a$ and its size $s$ can be chosen arbitrarily. Although there are no constraints for the \glspl{hidden layer}, the amount and size can hugely affect the efficiency and capability to learn. Every circle or ellipse represents one neuron. 
 \begin{figure}[H]
 \begin{center}
 \label{neuron}
@@ -473,7 +491,7 @@ The amount of hidden layers $a$ and its size $s$ can be chosen arbitrarily. Alth
 \label{neuron_vis}
 \end{center}
 \end{figure}
-In figure \ref{neuron_vis} the structure of a neuron can be seen. The abbreviation $i$ stands for input, $w$ refers to weight and $o$ to the output of the neuron. The inputs and weights can be described in the form of a \textit{vector}. The output $o$ gets weighted accordingly and functions as input for the following neurons. Each component represents one input or weight. This yields the vectors $\vec{i}$ and $\vec{w}$.
+In figure \ref{neuron_vis} the structure of a \gls{neuron} can be seen. The abbreviation $i$ stands for  \gls{input}, $w$ refers to \gls{weight} and $o$ to the \gls{output} of the neuron. The  \glspl{input} and \glspl{weight} can be described in the form of a \gls{vector}. The output $o$ gets weighted accordingly and functions as  \gls{input} for the following \glspl{neuron}. Each component represents one  \gls{input} or \gls{weight}. This yields the \glspl{vector} $\vec{i}$ and $\vec{w}$.
 \begin{align}
 \vec{i} = \begin{pmatrix}
 i_{1}\\ 
@@ -490,25 +508,25 @@ w_{n}
 \end{pmatrix}
 \label{def_vector}
 \end{align}
-The sum, in equation \ref{neuron_vis} referenced as net, is determined by the weighted summation of all the inputs. 
+The sum, in equation \ref{neuron_vis} referenced as net, is determined by the weighted summation of all the  \glspl{input}. 
 \begin{equation}
   \sum_{x = 1}^{n} i_{x} \cdot w_{x}  
   \label{net_sum}
 \end{equation}
-The equation \ref{net_sum} shows the net value in the form of a sum.
-Due to the properties of the \textit{scalar product} this sum can be rewritten in the form of this vector operation
+The equation \ref{net_sum} shows the \gls{net value} in the form of a sum.
+Due to the properties of the \gls{scalar product} this sum can be rewritten in the form of this \gls{vector} operation
 \begin{equation}
 net = \vec{i} \cdot \vec{w}
 \label{net_scal}
 \end{equation}
-This weighted sum gets forwarded to the activation function. By replacing the net value with the definition stated in equation \ref{net_scal}  and $f(x)$ being the activation function, the output is defined as follows:
+This weighted sum gets forwarded to the \gls{activation function}. By replacing the \gls{net value} with the definition stated in equation \ref{net_scal}  and $f(x)$ being the \gls{activation function}, the output is defined as follows:
 \begin{equation}
 \begin{gathered}
        o = f(net)\\
     o = f(\vec{i} \cdot \vec{w}) 
 \end{gathered}
 \end{equation}
-The final output or an intermediate result of a hidden layer can be expressed in a vector form.
+The final output or an intermediate result of a \gls{hidden layer} can be expressed in a vector form.
 \begin{equation}
 \begin{gathered}
       \begin{pmatrix}
@@ -524,7 +542,7 @@ f(net_{m})
 \end{pmatrix}
 \end{gathered}
 \end{equation}
-As we have seen in formula \ref{net_scal} the net value can also be described in a vector form. By expanding the stated definition it can be formulated, such that multiple values are defined in one vector. Although it yields the same result, the output vector $\vec{o}$ can be calculated easier when using net values in a vector form.
+As we have seen in formula \ref{net_scal} the \gls{net value} can also be described in a vector form. By expanding the stated definition it can be formulated, such that multiple values are defined in one \gls{vector}. Although it yields the same result, the output \gls{vector} $\vec{o}$ can be calculated easier when using \glspl{net value} in a vector form.
 \begin{equation}
     \begin{pmatrix}net_{1}\\ net_{2}\\ ...\\ net_{m}\end{pmatrix} =\begin{pmatrix}
 w_{1, 1} & w_{2, 1}  & ... &w_{n,1} \\ 
@@ -539,8 +557,8 @@ i_{n}
 \end{pmatrix}
 \label{out_vector}
 \end{equation}
-The formula \ref{out_vector} is a stacked up version of equation \ref{net_scal}. Every row represents all the weights from one specific neuron.The output of this neuron is used as input in the next one. It acts as output as well as an input, but nevertheless it is denoted by $i$. A noticeable remark is, that it fits with the definition of the scalar product, which requires the dimension of the first vector to be the same as the dimension of the second vector. Which is the case as it can be seen. The letter $s$ denotes the size of the layer which the output gets calculated of.
-However there are different kinds of neurons depending on their activation functions. Depending on the context, different functions are more efficient to use. The most common and popular types of such are:  \cite{neuronal_network}
+The formula \ref{out_vector} is a stacked up version of equation \ref{net_scal}. Every row represents all the \glspl{weight} from one specific neuron.The output of this \gls{neuron} is used as  \gls{input} in the next one. It acts as output as well as an  \gls{input}, but nevertheless it is denoted by $i$. A noticeable remark is, that it fits with the definition of the \gls{scalar product}, which requires the dimension of the first \gls{vector} to be the same as the dimension of the second \gls{vector}. Which is the case as it can be seen. The letter $s$ denotes the \gls{size} of the layer which the output gets calculated of.
+However there are different kinds of \glspl{neuron} depending on their  \glspl{activation function}. Depending on the context, different functions are more efficient to use. The most common and popular types of such are:  \cite{neuronal_network}
 \begin{figure}[H]\label{activation_function}
 \begin{minipage}[t]{0.5\textwidth}
 \begin{center}
@@ -563,7 +581,7 @@ However there are different kinds of neurons depending on their activation funct
 \addplot [mark=none,domain=-2.5:2.5] {x};
 \end{axis}
 \end{tikzpicture}\\
-Mostly used in input layers.
+Mostly used in \gls{input layer}.
 \end{center}
 \end{minipage}
 \begin{minipage}[t]{0.5\textwidth}
@@ -587,7 +605,7 @@ Mostly used in input layers.
 \addplot [mark=none,domain=-3:3] {1/(1+(e^-x))};
 \end{axis}
 \end{tikzpicture}\\
-Mostly used in hidden layers.
+Mostly used in \glspl{hidden layer}.
 \end{center}
 \end{minipage}
 
@@ -617,7 +635,7 @@ x \text{ for } x >  0
 \addplot [mark=none,domain=0:2.5] {x};
 \end{axis}
 \end{tikzpicture}\\
-Mostly used in hidden layers.
+Mostly used in \glspl{hidden layer}.
 \end{center}
 \end{minipage}
 \begin{minipage}[t]{0.5\textwidth}
@@ -645,111 +663,113 @@ f(x) \left\{\begin{matrix}
 \addplot [mark=none,domain=0:2.5] {1};
 \end{axis}
 \end{tikzpicture}\\
-Mostly used in output layers.
+Mostly used in  \glspl{output layer}.
 \end{center}
 \end{minipage}
 \end{figure}
-The derivative of these functions are important in order to make a learning process possible. It is used for the \textit{back propagation}. Therefore the linear and binary step functions are not really used in the hidden layers.
-Although the  \textit{sigmoid neuron} is biological more plausible, the ReLU functions has shown to be more efficient than hidden layers.\cite{advantages_activation} 
+The derivative of these functions are important in order to make a learning process possible. It is used for the \gls{back propagation}. Therefore \gls{linear function} and \gls{binary step function} are not really used in the \glspl{hidden layer}.
+Although the \gls{sigmoid neuron} is biological more plausible, the \gls{ReLU} functions has shown to be more efficient than \glspl{hidden layer}.\cite{advantages_activation} 
 \subsubsection{Learning}\label{learning}
-In order to learn the neuronal network gets optimized by changing the weights $w$. To change this values appropriately, for the task given, a goal has to be set. This goal is important to calculate how much they actual output differs from the wanted results. It is denoted by $t$, which stands for \textit{target}. The neuronal network can be compared to a functions which assigns to $n$ inputs, $m$ outputs.
+In order to learn the \gls{neuronal network} gets optimized by changing the \glspl{weight} $w$. To change this values appropriately, for the task given, a goal has to be set. This goal is important to calculate how much they actual output differs from the wanted results. It is denoted by $t$, which stands for \gls{target}. The \gls{neuronal network} can be compared to a functions which assigns to $n$ \glspl{input}, $m$ \glspl{output}.
 \begin{equation}
     f(x_{1},x_{2},x_{3},...,x_{n}) \rightarrow (y_{1},y_{2},y_{3},...,y_{m})
 \end{equation}
-With the data given the network compares the yielded output values to the target values by calculating the error. A similar formula is used to calculate the variance in statistics.
+With the data given the network compares the yielded \gls{output} values to the target values by calculating the error. A similar formula is used to calculate the variance in statistics.
 \begin{equation}
    E = \frac{1}{m}\sum_{i=1}^{m}\left ( y_{i}- t_{i} \right )^{2}
 \end{equation}
-To make backpropagation possible two of the three values, input, output and target, have to be constant. When the input vector $\vec{i}$ and the target $\vec{t}$ is fixed the only variable is $\vec{w}$. This can be used to analyze how much the output differs from the target for given weights. Reformulating yields a function which is only dependant on $\vec{w}$. By plugging this formula into the equation which assigns the numerical error it can be optimized to minimize the error. The function is denoted by:
+To make \gls{back propagation} possible two of the three values,  \gls{input}, \gls{output} and \gls{target}, have to be constant. When the \gls{input} \gls{vector} $\vec{i}$ and the target $\vec{t}$ is fixed the only variable is $\vec{w}$. This can be used to analyze how much the \gls{output} differs from the \gls{target} for given \glspl{weight}. Reformulating yields a function which is only dependant on $\vec{w}$. By plugging this formula into the equation which assigns the numerical error it can be optimized to minimize the error. The function is denoted by:
 \begin{equation}
 E_{\;\vec{i}\;\vec{t}}(\vec{w})
 \end{equation}
-The optimization happens due to the adjustment of the weights. As a result of the dependency, the outputs change with them. Which means by changing $\vec{w}$ we can achieve an convergence or divergence with the target values.
-The function $E$ is multidimensional, that means in order to be optimized the $gradient$ descent has to be used. This function is denoted by $\triangledown$. The gradient of a more-dimensional function describes its steepest ascent. \cite{grad} \\ In this context the gradient always points in the direction where the error increases the most. This would lead to an divergence of the outputs and targets. So the negative gradient can be used to find the direction, in which the error decreases the fastest. Adding a multiple of the negative gradient and the old weights together, the resulting weights are ensured to be closer to the target value than the old one. But this only holds when the factor, which the gradient gets multiplied with, is not to large. In the worst case scenario the new $\vec{w}$ does not perform better, because it overshoots the optimal point. An other unlucky case would be if the greatest descent of the function would lead to a local minimum which is achieving worse results than other minima. This can be prevented by fully optimizing the function multiple times with random weights. In order to complete the learning process, the optimizing has to be executed repeatedly until the outputs approximate the targets sufficiently. Mathematically the step can be defined as follows:
+The \gls{optimization} happens due to the adjustment of the \glspl{weight}. As a result of the dependency, the \glspl{output} change with them. Which means by changing $\vec{w}$ we can achieve an \gls{convergence} or \gls{divergence} with the target values.
+The function $E$ is multidimensional, that means in order to be optimized the \gls{gradient} descent has to be used. This function is denoted by $\triangledown$. The \gls{gradient} of a more-dimensional function describes its steepest ascent. \cite{grad} \\ In this context the \gls{gradient} always points in the direction where the error increases the most. This would lead to an \gls{divergence} of the \glspl{output} and \glspl{target}. So the negative \gls{gradient} can be used to find the direction, in which the error decreases the fastest. Adding a multiple of the negative \gls{gradient} and the old \glspl{weight} together, the resulting \glspl{weight} are ensured to be closer to the target value than the old one. But this only holds when the factor, which the \gls{gradient} gets multiplied with, is not to large. In the worst case scenario the new $\vec{w}$ does not perform better, because it overshoots the optimal point. An other unlucky case would be if the greatest descent of the function would lead to a local \gls{minimum} which is achieving worse results than other minima. This can be prevented by fully optimizing the function multiple times with random \glspl{weight}. In order to complete the learning process, the optimizing has to be executed repeatedly until the \glspl{output} approximate the \glspl{target} sufficiently. Mathematically the step can be defined as follows:
 
 \begin{equation} \label{opt_func}
     w_{new} = w_{old} - \alpha \cdot \triangledown E(w_{old})
 \end{equation}
-The constant $\alpha$ is called \textit{learning rate} and defines how fast this approximation should happen. By choosing a large value the trade-off for the time gained, is the diminishing accuracy. The target values can be calculated in different ways which have their own dis- and advantages. An AI which looks for patterns in pictures and has to state if the pictures shows something specific. The target then is defined by the data to be recognized, in our case an object. Therefore you would label all pictures accordingly to which object is seen on the picture. The neuronal network improves the ability to recognize this specific object or pattern with every picture shown, by comparing the actual label to the output of the neuronal network. An example would be that it should recognize a dog in a picture. The network gets all the pixels of the pictures and the labels as inputs. And should output dog or not a dog. By converting this label to a 0 for not a dog and 1 a dog the numerical value can be used as target value. By repeatedly showing pictures and making the optimization process stated in equation \ref{opt_func} the network recognises a dog increasingly better.
-The advantage of using neuronal networks instead of other algorithms can be the ability to generalize abstract information. To recognize patterns in data, that cannot be described mathematically. Although sometimes a machine learning approach can be unnecessary or inefficient. On the other hand, if the best possible non-machine learning algorithm is very hardware intensive, a machine learning approach might even be more efficient. Therefore it is an important point to evaluate, whether or not machine learning is more efficient or if it is necessary in the first place.
+The constant $\alpha$ is called \gls{learning rate} and defines how fast this approximation should happen. By choosing a large value the trade-off for the time gained, is the diminishing accuracy. The target values can be calculated in different ways which have their own dis- and advantages. An \gls{AI} which looks for patterns in pictures and has to \gls{state} if the pictures shows something specific. The \gls{target} then is defined by the data to be recognized, in our case an object. Therefore you would label all pictures accordingly to which object is seen on the picture. The \gls{neuronal network} improves the ability to recognize this specific object or pattern with every picture shown, by comparing the actual label to the \gls{output} of the \gls{neuronal network}. An example would be that it should recognize a dog in a picture. The network gets all the pixels of the pictures and the labels as \glspl{input}. And should \gls{output} dog or not a dog. By converting this label to a 0 for not a dog and 1 a dog the numerical value can be used as target value. By repeatedly showing pictures and making the optimization process stated in equation \ref{opt_func} the network recognises a dog increasingly better.
+The advantage of using \glspl{neuronal network} instead of other algorithms can be the ability to generalize abstract information. To recognize patterns in data, that cannot be described mathematically. Although sometimes a \gls{machine learning} approach can be unnecessary or inefficient. On the other hand, if the best possible non-\gls{machine learning} algorithm is very hardware intensive, a \gls{machine learning} approach might even be more efficient. Therefore it is an important point to evaluate, whether or not \gls{machine learning} is more efficient or if it is necessary in the first place.
 \section{Reinforcement learning}
 \subsection{Introduction to Reinforcement learning}
-The concept of reinforcement learning (RL) is to record multiple attempts of any kind to later decide which resulted into the best possible outcome. The main idea is to map situations to actions. And then giving a positive reward if the action was beneficial or a negative reward if the action was  \cite{suttonreinforcement} \\
+The concept of \gls{reinforcement learning} (RL) is to record multiple attempts of any kind to later decide which resulted into the best possible outcome. The main idea is to map situations to actions. And then giving a positive \gls{reward} if the action was beneficial or a negative \gls{reward} if the action was  \cite{suttonreinforcement} \\
 For that reason at every attempt we record three main categories: 
 \begin{itemize}
     \item State [$s$]
     \item Action [$a$]
     \item Reward [$r$]
 \end{itemize}
-If we take tic-tac-toe as an example, a \textit{state} would be the playing field. So in a programmatic approach you may take a list of nine elements representing nine fields. Each element then holds either a zero, one or two. A zero could stand for an empty field, one would be a cross and two a cross. This list of nine elements would then define a state. \\
-An \textit{action} in this case could be a number between zero and eight, representing the index of in which field is to be placed the next symbol.\\
-But the AI is missing one crucial part to learn successfully, feedback. Feedback in RL is given as a \textit{reward} of an action. It completes the thought behind Reinforcement learning. It's like training a dog, if it does well you give it a reward in form of tasty treats. The same principle applies to RL, if the actor plays well and for example scores three in a row in tic-tac-toe, you give the agent a reward of 100 points. You can take this concept one step further and penalize the actor with -100 points if it looses. The principle of reinforcement learning then is to use the collected data and process it in a way to form a strategy. The strategy in RL is called \textit{policy}. It's a function that calculates the most beneficial action given a state [$s$]. \cite{rl_tictactoe} \\
-This strategy can only work well if the actor is able to take action that affect the state. In addition, the state should relate to the goal in any way. If the problem can be expressed in a so-called \textit{Markov decision process}, as sensation, action, and goal, the problem is suitable for a RL approach.
+If we take tic-tac-toe as an example, a \lstinline{state} would be the playing field. So in a programmatic approach you may take a list of nine elements representing nine fields. Each element then holds either a zero, one or two. A zero could stand for an empty field, one would be a cross and two a cross. This list of nine elements would then define a \gls{state}. \\
+An \lstinline{action} in this case could be a number between zero and eight, representing the index of in which field is to be placed the next symbol.\\
+But the \gls{AI} is missing one crucial part to learn successfully, feedback. Feedback in RL is given as a \lstinline{reward} of an action. It completes the thought behind Reinforcement learning. It's like training a dog, if it does well you give it a \gls{reward} in form of tasty treats. The same principle applies to RL, if the actor plays well and for example scores three in a row in tic-tac-toe, you give the agent a \gls{reward} of 100 points. You can take this concept one step further and penalize the actor with -100 points if it looses. The principle of \gls{reinforcement learning} then is to use the collected data and process it in a way to form a strategy. The strategy in RL is called \gls{policy}. It's a function that calculates the most beneficial action given a \gls{state} [$s$]. \cite{rl_tictactoe} \\
+This strategy can only work well if the actor is able to take action that affect the \gls{state}. In addition, the \gls{state} should relate to the goal in any way. If the problem can be expressed in a so-called \gls{Markov decision process}, as sensation, action, and goal, the problem is suitable for a RL approach.
 \cite{suttonreinforcement} \\
-There are different approaches to reinforcement learning. One can use a probabilistic method to calculate the best suitable action. Or one could calculate all possibilities if they are finite. These methods try to approach the policy. In this case, a deep learning algorithm was used to approximate the policy. For more details continue to the next chapter.
+There are different approaches to \gls{reinforcement learning}. One can use a probabilistic method to calculate the best suitable action. Or one could calculate all possibilities if they are finite. These methods try to approach the \gls{policy}. In this case, a \gls{deep learning} algorithm was used to approximate the \gls{policy}. For more details continue to the next chapter.
 \cite{rl_overview}
 
 \subsection{Deep Q-networks (DQNs)}
 \subsubsection{Introduction to Q-learning}
-To first understand how Deep Q-learning works, one needs to understand the principles of \textit{Q-learning}.\\
-Q-learning is a RL algorithm which is operating \textit{off-policy}. This means that the RL algorithm learns from actions which are outside of it's policy. The 'Q' stands for 'quality', which in this context means how beneficial a action is in obtaining some future reward. The Q-learning algorithm is trying to learn a policy which maximises rewards. At the beginning the Q-learning algorithm will be taking random action, this is called \textit{exploration}. This holds the purpose of increasing the variety of experience the agent encounters. The opposite of exploration is \textit{exploitation} it is considered as taking the most beneficial action. The most beneficial action is called a \textit{greedy action}. \cite{rl_q-learning} \\
-\begin{figure}
-\[NewQ(s,a) = Q(s, a) + \alpha * [R(s, a) + \gamma * maxQ'(s', a') - Q(s, a)]\]
-\caption{Bellman Equation}
+To first understand how \gls{Deep Q-learning} works, one needs to understand the principles of \gls{Q-learning}.\\
+\gls{Q-learning} is a RL algorithm which is operating \gls{off-policy}. This means that the RL algorithm learns from actions which are outside of it's \gls{policy}. The 'Q' stands for 'quality', which in this context means how beneficial a action is in obtaining some future \gls{reward}. The \gls{Q-learning} algorithm is trying to learn a \gls{policy} which maximises \glspl{reward}. At the beginning the \gls{Q-learning} algorithm will be taking random action, this is called \gls{exploration}. This holds the purpose of increasing the variety of \gls{experience} the agent encounters. The opposite of \gls{exploration} is \gls{exploitation} it is considered as taking the most beneficial action. The most beneficial action is called a \gls{greedy action}. \cite{rl_q-learning} \\
+\begin{equation}
+Q_{new}(s,a) = Q(s, a) + \alpha \cdot [R(s, a) + \gamma \cdot Q_{max}'(s', a') - Q(s, a)]
 \label{BellmanEqu}
-\end{figure}
-The greedy action is selected using a \textit{Q-table}. It is a table with all actions separated into columns and all possible states as rows. For each state-action pair a expected future reward will be listed. Each of those values can be calculated using a bellman equation (fig. \ref{BellmanEqu}). Those values are referred to as the \textit{q-values} and represent how favorable an action is. The bellman equation will be explained in closer detail in the next chapters.  \cite{rl_q-table} 
+\end{equation}
+
+The \gls{greedy action} is selected using a \gls{Q-table}. It is a table with all actions separated into columns and all possible \glspl{state} as rows. For each state-action pair a expected future \gls{reward} will be listed. Each of those values can be calculated using a bellman equation (equation \ref{BellmanEqu}). Those values are referred to as the \glspl{Q-value} and represent how favorable an action is. The bellman equation will be explained in closer detail in the next chapters.  \cite{rl_q-table} 
 
 \subsubsection{Applying the basics of deep learning}
-Deep Q-learning is fundamentally the same as Q-learning. But instead of a Q-table representing the policy, a deep learning AI strives to approximate the perfect policy. But what remains is the bellman equation (fig. \ref{BellmanEqu}). The bellman equation shows how q-values are updated. In the same way as a Q-table, the deep q-learning agent has it's own memory. It is filled up to a certain value and if it exceeds the value, the program will remove older values to make room for the new memories. From that memory in certain steps, the deep learning algorithm will take random values and check for the optimal value of the new state [$s'$] and the new reward [$r'$] it could have taken. Then it weighs this value with gamma [$\gamma$] the variable for future reward. And subtracts it from the Reward. \cite{bellmanEquValue}
-\[Q(s,a) = R(s,a) - \gamma\cdot Q(s',a')\]
-This value will get subtracted by the actual Q-values it predicts. Which will then get inserted into the machine learning algorithm, in our case TensorFlow. There it will be weighted by the learning rate [$\alpha$]. Gamma and alpha as well as all the other are important variables for deep Q-learning are described more comprehensively in section \ref{sec:variables}.
+\gls{Deep Q-learning} is fundamentally the same as \gls{Q-learning}. But instead of a \gls{Q-table} representing the \gls{policy}, a \gls{deep learning} \gls{AI} strives to approximate the perfect \gls{policy}. But what remains is the bellman equation (equation \ref{BellmanEqu}). The bellman equation shows how \glspl{Q-value} are updated. In the same way as a \gls{Q-table}, the deep \gls{Q-learning} agent has it's own \gls{memory}. It is filled up to a certain value and if it exceeds the value, the program will remove older values to make room for the new memories. From that \gls{memory} in certain steps, the \gls{deep learning} algorithm will take random values and check for the optimal value of the new \gls{state} [$s'$] and the new \gls{reward} [$r'$] it could have taken. Then it weighs this value with \gls{gamma} [$\gamma$] the variable for future \gls{reward}. And subtracts it from the \gls{reward}. \cite{bellmanEquValue} \\
+This value will get subtracted by the actual \glspl{Q-value} it predicts. Which will then get inserted into the \gls{machine learning} algorithm, in our case TensorFlow. There it will be weighted by the \gls{learning rate} [$\alpha$]. \Gls{gamma} and \gls{alpha} as well as all the other are important variables for \gls{Deep Q-learning} are described more comprehensively in section \ref{sec:variables}.
 
-\section{Implementation of machine learning and user interface}
+\section{Implementation}
 \subsection{Python}
 The first decision when approaching such a project, is which programming language to use. In this case Python was the favorable choice, because of the familiarity to the language. It's a simple language, yet a powerful tool. Python is considered best practice in scientific applications. All that whilst being one of the most popular language, yielding many results for a wide variety of problems. That's why Python was used for this project. \cite{Python} 
 \subsection{TensorFlow}
-The second decision one has to take for such a project, is which machine learning framework to use. TensorFlow is an end-to-end open source platform for machine learning. It was developed by the Google Brain Team. Today it's considered as one of the most important machine learning frameworks. It works in many programming languages including Python. TensorFlow allows a relatively simple implementation of machine learning. \cite{Tensorflow}\cite{TensorFlowWikipedia}\\
-In this project the focus was laid on TensorFlow 2, the second version of TensorFlow. Therefore a basis of any TensorFlow 2 code was required. The basic example of a TensorFlow model is \textit{CartPole}. It can be described as an environment containing a Cart which moves along a frictionless track. A pole which stands upright at first is attached via a joint to the cart. The machine learning algorithm should then balance this joint by moving the cart. This project used such an example by Siwei Xu as basis of the TensorFlow implementation. Subsequently this example was adapted to our own use.
+The second decision one has to take for such a project, is which \gls{machine learning} framework to use. TensorFlow is an end-to-end open source platform for \gls{machine learning}. It was developed by the Google Brain Team. Today it's considered as one of the most important \gls{machine learning} frameworks. It works in many programming languages including Python. TensorFlow allows a relatively simple implementation of \gls{machine learning}. \cite{Tensorflow}\cite{TensorFlowWikipedia}\\
+In this project the focus was laid on TensorFlow 2, the second version of TensorFlow. Therefore a basis of any TensorFlow 2 code was required. The basic example of a TensorFlow model is \gls{CartPole}. It can be described as an \gls{environment} containing a Cart which moves along a frictionless track. A pole which stands upright at first is attached via a joint to the cart. The \gls{machine learning} algorithm should then balance this joint by moving the cart. This project used such an example by Siwei Xu as basis of the TensorFlow implementation. Subsequently this example was adapted to our own use.
 \cite{ourDqnModelBasis}
+\subsection{Numpy}
+
 \subsection{Variables} \label{sec:variables}
-\subsubsection{Gamma [\(\gamma\)]}
-Gamma determines the importance of future rewards by multiplying them with a constant numerical factor from 0 to 1. The product is added to the reward in order to make it numerically more gaining, to plan for the future.
+\subsubsection{Gamma [\(\gamma\)]}\label{sssec:gamma}
+\Gls{gamma} determines the importance of future \glspl{reward} by multiplying them with a constant numerical factor from 0 to 1. The product is added to the \gls{reward} in order to make it numerically more gaining, to plan for the future.
 
 \subsubsection{Epsilon [\(\epsilon\)] and Decay}
-Epsilon determines the exploration rate with a numerical value from 0 to 1. If a random number in the same interval is smaller, the Agent will take random action, otherwise the choice that the AI consideres as optimal, the so-called \textit{greedy choice}, will be chosen. This value gets continuously decreased over time by a constant decay-factor and thus making the chance smaller to take random actions increasing with time. The randomness is used to ensure diversity of the first few decisions. This does not guarantee that the network will find the most efficient strategy but it decreases the likelyhood of repeatedly choosing a relatively good tactic, which is in comparison with other efficient ways worse.
+Epsilon determines the \gls{exploration rate} with a numerical value from 0 to 1. If a random number in the same interval is smaller, the Agent will take random action, otherwise the choice that the \gls{AI} consideres as optimal, the so-called \gls{greedy action}, will be chosen. This value gets continuously decreased over time by a constant decay-factor and thus making the chance smaller to take random actions increasing with time. The randomness is used to ensure diversity of the first few decisions. This does not guarantee that the network will find the most efficient strategy but it decreases the likelyhood of repeatedly choosing a relatively good tactic, which is in comparison with other efficient ways worse.
 
 \subsubsection{Number of Episodes [\(N\)]}
-$N$ determines the amount of games which are used to train the AI.
+$N$ determines the amount of games which are used to train the \gls{AI}.
 
-\subsubsection{Alpha [\(\alpha\)]}
-Alpha determines how drastically the weights in the neuronal network get changed. This by multiplying the optimizing change by the constant factor alpha. The weights get changed in order to minimize the loss function.
+\subsubsection{Alpha [\(\alpha\)]}\label{sssec:alpha}
+\Gls{alpha} determines how drastically the \glspl{weight} in the \gls{neuronal network} get changed. This by multiplying the optimizing change by the constant factor \gls{alpha}. The \glspl{weight} get changed in order to minimize the loss function.
 
 \subsubsection{Experience and Copy Step}\label{sssec:copy_step}
-The experience of a DQN model is like in a human brain the memory of events. Our DQN model saves the state, taken action, reward, the new state and if the game is done (and therefore the last step). There are two variables min experience and max experience. The min experience variable defines how many events it must have saved, that it actually processes the inputs. Max experience defines how many events are getting saved in total until it starts deleting the oldest one while adding a new one. 
-This DQN actually consists of two seperate neuronal networks. Firstly the TrainNet (Train Network), the network that is the most up-to-date and decides which actions to take. The other one is called TargetNet (Target Network), it’s meant for training purposes only. This network is structurally identical to the TrainNet. It will be periodically updated every certain step. Copy step defines the frequency of these updates. The purpose of the TargetNet is to avoid abrupt changes of strategy. 
+The \gls{experience} of a \gls{DQN} model is like in a human brain the \gls{memory} of events. Our \gls{DQN} model saves the \gls{state}, taken action, \gls{reward}, the new \gls{state} and if the game is done (and therefore the last step). There are two variables \gls{min experience} and \gls{max experience}. The min \gls{experience} variable defines how many events it must have saved, that it actually processes the \glspl{input}. Max \gls{experience} defines how many events are getting saved in total until it starts deleting the oldest one while adding a new one. 
+This \gls{DQN} actually consists of two seperate \glspl{neuronal network}. Firstly the \gls{TrainNet} (Train Network), the network that is the most up-to-date and decides which actions to take. The other one is called  \gls{TargetNet} (Target Network), it’s meant for training purposes only. This network is structurally identical to the  \gls{TrainNet}. It will be periodically updated every certain step. \Gls{copy step} defines the frequency of these updates. The purpose of the  \gls{TargetNet} is to avoid abrupt changes of strategy. 
 
 \subsubsection{Batch Size}
-The batch size determines how many states should be processed at once, in order to detect movement. 
-
+The batch size determines how many \glspl{state} should be processed at once, in order to detect movement. 
 \subsection{Pygame}
-This project contains games that are played by ANNs. Each of those games have been created in a way that makes it possible to play them \textit{headless}. Headless is a term that is commonly used in informatics to describe a system or program that runs without a graphical user interface (GUI or just UI). This for the simple reason, that an AI should be able to train without having to wait for the GUI to catch up. That way the AI can train as time efficiently as possible, resulting possibilities to train the ANNs on larger number of games. Nevertheless it is important to be able to see what an AI is doing. This can resolve errors more intuitively, also errors in the game logic. Additionally, it can show people that have never coded before in a non-abstract version, how the AI works. So for the graphical interface Pygame is a good choice. It is resource efficient in comparison to other options in Python and offers features such as key-presses, mouse position and mouse clicks. Although when comparing it to other non-Python interface builders, it's quite \textit{low-level}. This means that you only get the most basic commands, such as the ability to draw rectangles and circles with manual coordinates. Pygame acts on a frame-by-frame basis. Meaning you have to redraw your scene ever fraction of a second, for example 30 times/frames per second (30 fps). Motion has to be described in coordinates moving pixel by pixel every certain time step. Also when analysing mouse-presses you have to check whether or not the mouse is in a certain area or not. On the one hand this gets complicated very quickly, but on the other hand you get all possibilities without limitations. Pygame gives you the creative freedom to design everything the way you'd like it to be. \cite{PyGame}
+This project contains games that are played by \glspl{ANN}. Each of those games have been created in a way that makes it possible to play them \gls{headless}. \Gls{headless} is a term that is commonly used in informatics to describe a system or program that runs without a graphical user interface (GUI or just UI). This for the simple reason, that an \gls{AI} should be able to train without having to wait for the GUI to catch up. That way the \gls{AI} can train as time efficiently as possible, resulting possibilities to train the \glspl{ANN} on larger number of games. Nevertheless it is important to be able to see what an \gls{AI} is doing. This can resolve errors more intuitively, also errors in the game logic. Additionally, it can show people that have never coded before in a non-abstract version, how the \gls{AI} works. So for the graphical interface Pygame is a good choice. It is resource efficient in comparison to other options in Python and offers features such as key-presses, mouse position and mouse clicks. Although when comparing it to other non-Python interface builders, it's quite \gls{low-level}. This means that you only get the most basic commands, such as the ability to draw rectangles and circles with manual coordinates. Pygame acts on a frame-by-frame basis. Meaning you have to redraw your scene ever fraction of a second, for example 30 times/frames per second (30 fps). Motion has to be described in coordinates moving pixel by pixel every certain time step. Also when analysing mouse-presses you have to check whether or not the mouse is in a certain area or not. On the one hand this gets complicated very quickly, but on the other hand you get all possibilities without limitations. Pygame gives you the creative freedom to design everything the way you'd like it to be. \cite{PyGame}
+\subsection{Matplotlib}
+\lstinline{Matplotlib} is ä library for python which is widely used to make static, interactive or animated visualizations. The project uses this library solely for the evaluations. The data, which were gathered during a training phase, get plotted using this library.
 \section{Basic structure of code}
-Readability is an important factor of coding too. Therefore this project went with a object oriented layout of the code. This basically means that the data is structured in objects, for example in classes. This code has one class which is the model itself \lstinline{MyModel()} and \lstinline{DQN()}, those will be explained in more detail in section \ref{sec:TheModel}. In the file \lstinline{games.py} every game has it's own class. These classes handle all the game inputs, processing and generate the output for the AI and the player. Then there's \lstinline{train_dqn.py} and \lstinline{train_dqn_vs_dqn.py}, which both explain two training methods with a class each. Some minor additional subprograms are used. For example \lstinline{log.py} was implemented to generate log files and plot the results of a training session into a graph. This type of structure holds the advantage of having the possibility generalize code and easily switch out a game, or change the model. Additionally, it further improves readability.
+Readability is an important factor of coding too. Therefore this project went with a object oriented layout of the code. This basically means that the data is structured in objects, for example in classes. This code has one class which is the model itself \lstinline{MyModel()} and \lstinline{DQN()}, those will be explained in more detail in section \ref{sec:TheModel}. In the file \lstinline{games.py} every game has it's own class. These classes handle all the game \glspl{input}, processing and generate the \gls{output} for the \gls{AI} and the player. Then there's \lstinline{train_dqn.py} and \lstinline{train_dqn_vs_dqn.py}, which both explain two training methods with a class each. Some minor additional subprograms are used. For example \lstinline{log.py} was implemented to generate log files and plot the results of a training session into a graph. This type of structure holds the advantage of having the possibility generalize code and easily switch out a game, or change the model. Additionally, it further improves readability.
 
 \section{The model}\label{sec:TheModel}
 \subsection{The class MyModel}\label{mymodel}
-The class \lstinline{MyModel()} creates a callable neuronal network using \lstinline{keras}. This class can be devided into two parts. If it gets called for the first time the whole network gets created and initialized, which is the first part. The creation follows exactly the mathematical model discussed before. The second part makes it possible to call this network and calculated numerical values, with inputs given.
+The class \lstinline{MyModel()} creates a callable \gls{neuronal network} using \lstinline{keras}. Keras is a library makes the process of setting a TensorFlow model more straightforward. MyModel can be divided into two parts. Where it gets called for the first time, the whole network gets created and initialized, which is the first part. The creation follows exactly the mathematical model discussed before. The second part makes it possible to call this network and calculated numerical values, with  \glspl{input} given.
 \lstset{ numbers=left, stepnumber=1,      firstnumber=1,  numberfirstline=true}
-\begin{lstlisting}[language=Python,numbers=left, caption=Example - Creation of a neuronal network using Keras.]
+\begin{lstlisting}[language=Python,numbers=left, caption=Example - Creation of a \gls{neuronal network} using Keras.]
 def __init__(self, num_states, hidden_units, num_actions):
 \end{lstlisting}
-The definition require certain inputs to function. The input \lstinline{self} passes on the class, which enables to make the network in a specific format. This format is used by \lstinline{Keras} and required to interfere with it and use kera-specific functions. The model uses the same three kind of layers to make a network as the mathematical one.
+On initialisation of the class, some \glspl{input} in form of parameters are needed. The \gls{input} \lstinline{self} passes on the class, which enables the function to access the class it's located in. This format is used by \lstinline{Keras} and required to interfere with it and use kera-specific functions. The model uses the same three kinds of  \glspl{layer} as explained in the mathematical part.
 \lstset{ numbers=left, stepnumber=1,      firstnumber=2,  numberfirstline=true}
 \begin{lstlisting}[language=Python]
     self.input_layer = tf.keras.layers.InputLayer(input_shape=(num_states,))
 \end{lstlisting}
-The layer where the data gets passed on, is the input layer. In which size this data occurs is defined by the variable \lstinline{num_states}. Keras requires a tuple for defining the size of this layer, which gets passed with \lstinline{input_shape}. It could also be multidimensional but for the projects purposes one dimension is sufficient.
+The layer where the data gets passed on, is the \gls{input layer}. \lstinline{num_states} is the variable that defines the size of the \gls{input layer} and respectively the size of the data that will be inserted into the \gls{neuronal network}. Keras requires a tuple for defining the size of this layer, which gets passed with \lstinline{input_shape}. It could also be multidimensional but for the projects purposes one dimension is sufficient.
 \lstset{ numbers=left, stepnumber=1,      firstnumber=4,  numberfirstline=true}
 \begin{lstlisting}[language=Python,numbers=left]
     self.hidden_layers = []
@@ -757,30 +777,31 @@ The layer where the data gets passed on, is the input layer. In which size this 
         self.hidden_layers.append(tf.keras.layers.Dense( 
             i, activation='relu', kernel_initializer='RandomNormal')) 
 \end{lstlisting}
-The second type are the hidden units. This part is required to have more than just one layer. So the input \lstinline{hidden_units} passes on a list, in which every numerical element represents one layer with the size of its value. This happens by firstly, clearing all the hidden layers, which can be seen in line four. Secondly a \lstinline{for loop} iterates over all elements of \lstinline{hidden_units}. For every iteration the procedure is the same. The size of the layer gets passed on. Additionally the activation function gets set to ReLU. The \lstinline{kernel_initializer} determines in which state the weights should be in the beginning. The project uses solely \lstinline{RandomNormal}, which sets the weights to a random numerical value. Why this is optimal can be seen in the section \ref{learning}.
+The second type are the \gls{hidden units}. This type is required to have more than just one layer. So the parameter \lstinline{hidden_units} passes on a list, in which every numerical element represents one layer with the size of its value. This happens by firstly clearing all the \glspl{hidden layer}, which can be seen in line four. Secondly a \lstinline{for loop} iterates over all elements of \lstinline{hidden_units}. For every iteration the procedure is the same. The size of the layer gets passed on. Additionally the \gls{activation function} gets set to ReLU. The \lstinline{kernel_initializer} determines in which \gls{state} the \glspl{weight} should be in the beginning. The project uses solely \lstinline{RandomNormal}, which sets the \glspl{weight} to a random numerical value. Why this is optimal can be seen in the section \ref{learning}.
 \lstset{ numbers=left, stepnumber=1,      firstnumber=8,  numberfirstline=true}
 \begin{lstlisting}[language=Python,numbers=left]
     self.output_layer = tf.keras.layers.Dense(
         num_actions, activation='linear', kernel_initializer='RandomNormal')
 \end{lstlisting}
-The output layer is the last of the three layers. The same procedure as before gets applied, except with one change. The activation function is now set to linear instead of the rectified linear unit. The model has just one output layer so this will happen once.
+The \gls{output layer} is the last of the three layer types. The same procedure as before gets applied, except with one change. The \gls{activation function} is now set to linear instead of the rectified linear unit. The model has just one \gls{output layer} so this will happen once.
 \lstset{ numbers=left, stepnumber=1,firstnumber=1,  numberfirstline=true}
-\\ After the initialization the model exists. To make it callable, as the projects needs it to be, an additional definition has to be added.
+\\ The first part of the class is now completed. To make it callable an additional definition has to be added.
 \begin{lstlisting}[language=Python, caption = Example - Making the model callable]
-def call(self, inputs):
-    z = self.input_layer(inputs) 
+def call(self, input):
+    z = self.input_layer(input) 
     for layer in self.hidden_layers: 
         z = layer(z) 
     output = self.output_layer(z) 
     return output
 \end{lstlisting}
-The inputs of this call function consists of the model itself, which gets passed by \lstinline{self} and the inputs one wants to have processed. The structure of the project assures that the inputs have the same dimension as the input layer size. So the inputs can be stored in the variable \lstinline{z}. The format of \lstinline{z} is set by \lstinline{Keras} to a tensor, which is a specific kind of vector. The input layers passes the values on to the first hidden units. By iterating over the hidden layers the values get passed on, by taking the output of one hidden layer as the input for the next. This can be seen in line three and four. In line five the last hidden layer passes the value on to the output layer and saves this value in \lstinline{output}. The variable gets returned.
-\subsection{The class DQN}
-The structure of this class is more complex than the MyModel class due to conditions it has to fulfill. As the class discussed before it has an initialisation part, in which all variable get set. MyModel gets called for the first time in this step, in order to create a neuronal network. The most important part is the memory, which is stored as a dictionary. This memory looks like the following:
-\begin{lstlisting}[language=Python, caption = Example - The memory of the neuronal network]
+The  \glspl{input} of this call function consists of the model itself, which gets passed by \lstinline{self} and the  \glspl{input} one wants to have processed. The structure of the project assures that the  \glspl{input} have the same dimension as the \gls{input layer} size. So the  \glspl{input} can be stored in the variable \lstinline{z}. The format of \lstinline{z} is set by \lstinline{Keras} to a \gls{tensor}, which is a specific kind of \gls{vector}. The \gls{input layer} passes the values on to the first \gls{hidden units}. By iterating over the \glspl{hidden layer} the values get passed on, by taking the \gls{output} of one hidden layer as the \gls{input} for the next. This can be seen in line three and four. In line five the last hidden layer passes the value on to the  \gls{output layer} and saves this value in \lstinline{output}. The variable gets returned.
+\subsection{The class DQN}\label{ssec:DQN}
+The structure of this class is more complex than the MyModel class due to conditions it has to fulfill. As the class discussed before it has an initialisation part, in which all variable get set. MyModel gets called for the first time in this step, in order to create a \gls{neuronal network}. The most important part is the \gls{memory}, which is stored as a dictionary. It is structured in the following way:
+\begin{lstlisting}[language=Python, caption = Example - The \gls{memory} of the \gls{neuronal network}]
 experience = {'s': [], 'a': [], 'r': [], 's2': [], 'done': []}
 \end{lstlisting}
-As it can be seen in the code fragment above five types of information get stored. The first string \lstinline{'s'} saves the state of the game in the beginning. \lstinline{'a'} stands for the action the AI had taken and \lstinline{'r'} for the rewards it yielded. What the action lead to gets stored in \lstinline{'s2'}. If the game is over \lstinline{'done'} will change to \lstinline{True}, otherwise it is set to \lstinline{False}. The memory is used in order to train the model.\\ To get a brief overview the following functions are defined in the class:
+At every step of the game one of these dictionaries will be created and then added to a table of all memories the agent is remembering.
+As it can be seen in the code fragment above five types of information get stored. The first string \lstinline{'s'} saves the \gls{state} of the game in the beginning. \lstinline{'a'} stands for the action the \gls{AI} had taken and \lstinline{'r'} for the \glspl{reward} it yielded. What the action lead to gets stored in \lstinline{'s2'}. If the game is over \lstinline{'done'} will change to \lstinline{True}, otherwise it is set to \lstinline{False}. The \gls{memory} is used in order to train the model. \\ To get a brief overview the following functions are defined in the class:
 \begin{enumerate}
     \item predict
     \item get\_action
@@ -790,8 +811,8 @@ As it can be seen in the code fragment above five types of information get store
     \item copy\_weights
     \item train
 \end{enumerate}
-The first function \lstinline{predict} makes a prediction with a model discussed in chapter \ref{mymodel}. The next three functions do similar things except the output differs slightly. For all of them  Epsilon and the state are inputs. Whereas epsilon is used to decide whether a random action should be taken or not. In \lstinline{get_action} the output is defined by the maximal value the network can achieve in this state.  \lstinline{get_q} does the same thing except returning also the boolean value \lstinline{True} if a random action was taken. The function \lstinline{get_prob}  returns the normalized probability, which yield therefore a value between zero and one. The memory has some requirements. The newest information should get stored and if the memory exceeds the value stated in the variable \lstinline{max_experience}, the oldest information should get deleted. That is exactly what happens in \lstinline{add_experience} in order to make a memory. The sixth function copies all the weights from the normal neuronal network to the training network. Why this has to be done can be seen in chapter \ref{sssec:copy_step}.\\
-The most complex and important function of this class is \lstinline{train}. Firstly, a random memory and its following memories get loaded. The amount of information is set by \lstinline{batch_size}. This were stored before with the \lstinline{add_experience} function. To take the future rewards into account the \lstinline{TargetNet} evaluates the maximum reward possible by the action taken. In the memories, where the action was successful, the values get incremented by \textit{gamma} times the value computed by the  \lstinline{TargetNet}, which represents the future rewards. 
+The first function \lstinline{predict} makes a prediction with the model discussed in chapter \ref{mymodel}. The next three functions do similar things except the \gls{output} differs slightly. For all of them  Epsilon and the \gls{state} are  \glspl{input}. Whereas epsilon is used to decide whether a random action should be taken or not. In \lstinline{get_action} the \gls{output} is defined by the maximal value the network can achieve in this \gls{state}.  \lstinline{get_q} \glspl{output} the raw \glspl{Q-value} it predicted. It also returns the boolean value \lstinline{True} if a random action was taken. The function \lstinline{get_prob}  returns the normalized probability calculated by the \glspl{Q-value}, which therefore yield a value between zero and one. \\ The function \lstinline{add_experience} is responsible for storing the \gls{experience} necessary and gets called every time the agent has made a step in a game. As soon as this function gets called, a new \gls{experience} dictionary will be stored. If the \gls{memory} exceeds the value stated in the variable \lstinline{max_experience}, the oldest information will get deleted. The sixth function \lstinline{copy_weights} copies all the \glspl{weight} from the normal \gls{neuronal network} to the training network. Why this is important, is explained in chapter \ref{sssec:copy_step}.\\
+The most complex and important function of this class is \lstinline{train}. Firstly, a random \gls{memory} gets selected to analyse. Then the variable \lstinline{batch_size} determines how many memories after the selected \gls{memory} should be taken into consideration. These were stored before by the \lstinline{add_experience} function. To take the future \glspl{reward} into account the \lstinline{TargetNet} evaluates the maximum \gls{reward} possible by the action taken. In those memories, where the action was optimal, the values get incremented by \gls{gamma} times the value computed by the \lstinline{TargetNet}, which represents the future \glspl{reward}. 
 \begin{lstlisting}[language=Python, caption = Example - Optimization of the network]
 with tf.GradientTape() as tape:
     selected_action_values = tf.math.reduce_sum( self.predict(states) * tf.one_hot(actions, self.num_actions), axis=1) 
@@ -803,11 +824,12 @@ gradients = tape.gradient(loss, variables)
 self.optimizer.apply_gradients(zip(gradients, variables)) 
 return loss
 \end{lstlisting}
-In line 1 the \lstinline{Tensorflow} function \lstinline{GradientTape} is used. This function automatically observes any object of the type \lstinline{tf.Variable} in order to compute the according gradient\cite{tf.grad}. The variable \lstinline{selected_action_values} corresponds to the value which the model gets when one specific action was taken.
- To make it easier to understand line two gets splitted into subparts. First of all the \lstinline{tf.one_hot} has to be understood. This functions converts the tensor into a one hot encoded one.
- \begin{centering}
- \begin{table}[H]
-  \caption{visualization of one hot encoding}
+In line 1 the \lstinline{Tensorflow} function \lstinline{GradientTape} is used. This function automatically observes any object of the type \lstinline{tf.Variable} in order to compute the according \gls{gradient}. \cite{tf.grad} To better understand line 2, let's take a closer look at every part of it. So firstly \lstinline{self.predict(states)} gets all \glspl{Q-value} of the according \gls{state} again. This then gets element wisely multiplied by the one hot encoded action. \Gls{one hot encoding} is when you take a categorical value and display it in a table of binary values (see table \ref{tab:oneHot}). 
+
+\begin{centering}
+\begin{table}[H]
+\caption{visualization of \gls{one hot encoding}}
+\label{tab:oneHot}
 \begin{tabular}{lllllllll}
 Label encoding               &  &  &  &                       & \multicolumn{4}{l}{One hot encoding}                                                              \\ \cline{1-1} \cline{6-9} 
 \multicolumn{1}{|l|}{Color} &
@@ -815,12 +837,12 @@ Label encoding               &  &  &  &                       & \multicolumn{4}{
    &
    &
   \multicolumn{1}{l|}{} &
-  \multicolumn{1}{l|}{green} &
-  \multicolumn{1}{l|}{red} &
-  \multicolumn{1}{l|}{yellow} &
-  \multicolumn{1}{l|}{blue} \\ \cline{1-1} \cline{6-9} 
-\multicolumn{1}{|l|}{green}  &  &  &  & \multicolumn{1}{l|}{} & \multicolumn{1}{l|}{1} & \multicolumn{1}{l|}{0} & \multicolumn{1}{l|}{0} & \multicolumn{1}{l|}{0} \\ \cline{1-1} \cline{6-9} 
-\multicolumn{1}{|l|}{red} &
+  \multicolumn{1}{l|}{green (1)} &
+  \multicolumn{1}{l|}{red (2)} &
+  \multicolumn{1}{l|}{yellow (3)} &
+  \multicolumn{1}{l|}{blue (4)} \\ \cline{1-1} \cline{6-9} 
+\multicolumn{1}{|l|}{green (1)}  &  &  &  & \multicolumn{1}{l|}{} & \multicolumn{1}{l|}{1} & \multicolumn{1}{l|}{0} & \multicolumn{1}{l|}{0} & \multicolumn{1}{l|}{0} \\ \cline{1-1} \cline{6-9} 
+\multicolumn{1}{|l|}{red (2)} &
    &
   \multicolumn{2}{l}{$\rightarrow$} &
   \multicolumn{1}{l|}{} &
@@ -828,22 +850,42 @@ Label encoding               &  &  &  &                       & \multicolumn{4}{
   \multicolumn{1}{l|}{1} &
   \multicolumn{1}{l|}{0} &
   \multicolumn{1}{l|}{0} \\ \cline{1-1} \cline{6-9} 
-\multicolumn{1}{|l|}{blue}   &  &  &  & \multicolumn{1}{l|}{} & \multicolumn{1}{l|}{0} & \multicolumn{1}{l|}{0} & \multicolumn{1}{l|}{0} & \multicolumn{1}{l|}{1} \\ \cline{1-1} \cline{6-9} 
-\multicolumn{1}{|l|}{green}  &  &  &  & \multicolumn{1}{l|}{} & \multicolumn{1}{l|}{1} & \multicolumn{1}{l|}{0} & \multicolumn{1}{l|}{0} & \multicolumn{1}{l|}{0} \\ \cline{1-1} \cline{6-9} 
-\multicolumn{1}{|l|}{yellow} &  &  &  & \multicolumn{1}{l|}{} & \multicolumn{1}{l|}{0} & \multicolumn{1}{l|}{0}  & \multicolumn{1}{l|}{1} & \multicolumn{1}{l|}{0} \\ \cline{1-1} \cline{6-9} 
+\multicolumn{1}{|l|}{blue (4)}   &  &  &  & \multicolumn{1}{l|}{} & \multicolumn{1}{l|}{0} & \multicolumn{1}{l|}{0} & \multicolumn{1}{l|}{0} & \multicolumn{1}{l|}{1} \\ \cline{1-1} \cline{6-9} 
+\multicolumn{1}{|l|}{green (1)}  &  &  &  & \multicolumn{1}{l|}{} & \multicolumn{1}{l|}{1} & \multicolumn{1}{l|}{0} & \multicolumn{1}{l|}{0} & \multicolumn{1}{l|}{0} \\ \cline{1-1} \cline{6-9} 
+\multicolumn{1}{|l|}{yellow (3)} &  &  &  & \multicolumn{1}{l|}{} & \multicolumn{1}{l|}{0} & \multicolumn{1}{l|}{0}  & \multicolumn{1}{l|}{1} & \multicolumn{1}{l|}{0} \\ \cline{1-1} \cline{6-9} 
 \end{tabular}
 \end{table}
- \end{centering}
- This encoding has an advantage when calculating with matrices. The product of such a matrix with another matrix yields a labeled encoding matrix. In this case all elements of the one hot encoded matrix are $0$, except the one option which was chosen by the AI. Multiplying this specific tensor with the values yields the same matrix as before but instead of a $1$ there is now the expected value for this action. To condense this further \lstinline{tf.math.reduce_sum} is used in order to add elements together. As stated before all elements are $0$ except of the row which the action was taken, so the result of this operations returns the expected value of the action.\cite{tf.math.reduce}
- On line four the mathematical mean gets calculated and stored in the variable \lstinline{loss}. The trainable variables of the network are the weights and they get allocated to the container \lstinline{variables} on line six. Depending on the weights the loss differs. This implies, that in order to minimize the loss, the derivative with respect to the loss has to be calculated.  Which happens on line seven. Due to the special format of the \lstinline{tape} the rather simple subtraction has to be executed using \lstinline{optimizer.apply_gradients}, as it can be seen in line eight.\cite{tf.keras.optimizers}
+\end{centering}
+But why should one do this extra effort? Let's think of following situation: One wants to  \gls{input} four colors into a \gls{neuronal network}. Now you can only  \gls{input} numerical values, not strings. So one may refer to each color a identical number. Green is one, red is two, yellow is three and blue is four. This could work, but it has one flaw. The \gls{neuronal network} could conclude that blue is the most superior colour there is, since it has the highest number attached. Analogously the \gls{deep learning} \gls{AI} could say that green is the least favorable category. To defeat this behaviour, \gls{machine learning} researchers use one hot encoded tables (as example see table \ref{tab:oneHot}). Now back to line 2, the program element wisely multiplies ($\odot$) the one hot encoded action previously taken by the \gls{AI} with the newly predicted \glspl{Q-value}. Then the \gls{tensor} gets added up along the y-axis using \lstinline{tf.math.reduce_sum}. \cite{tf.math.reduce}
+This complex procedure is a strategy to get the re-evaluated \gls{Q-value} of the action taken. See following example to understand more closely:
+\begin{align}
+    \text{Nr. of possible actions (\lstinline{self.num_actions})} &= 4 \notag\\    
+    \text{Action previously taken} &= 2 \notag\\
+    \text{One hot encoded action} &= [0,0,1,0] \tag{1}\\
+    \text{\glspl{Q-value} calculated by the AI} &= [1150, 1535, 1220, 773] \tag{2}\\
+    (1)\odot(2) &= [0,0,1220,0] \notag\\
+    \text{tf.math.reduce\_sum([0,0,1220,0], axis=1)} &= 1220\notag
+\end{align}
+
+On line 4 the program calculates the loss of the action taken. In order to understand this line, there needs to be a definition for the variable \lstinline{actual_values}. This variable is being calculated by predicting the maximal \gls{Q-value} with the \gls{TargetNet} of the new \gls{state} multiplied by \gls{gamma}. That should represent the future \gls{reward} weighted by \gls{gamma}. This then gets added to the \gls{reward} of the current \gls{memory} if it is not a \gls{memory} of the last step in a game. If this \gls{memory} is the last step of a game, the actual\_values variable will be just the \gls{reward} of that \gls{memory}. So concluding this is the way how the actual\_value gets calculated:
+\begin{equation}\nonumber
+\text{\lstinline{actual_value}} = R(s, a) + \gamma \cdot Q'_{max}(s', a')
+\end{equation}
+This is enough to understand line 4. The \lstinline{actual_value} gets subtracted from the \lstinline{selected_values}, which is a re-evaluated \gls{Q-value} of the action taken. That subtraction is then squared and saved as the loss: 
+\begin{equation}\nonumber
+    \text{\lstinline{loss}} = \left [ R(s, a) + \gamma \cdot Q_{max}'(s', a') - Q(s, a) \right ]^{2}
+\end{equation}
+As seen in line 4 \lstinline{tf.math.reduce_mean} is taken, this because we are processing multiple values (amount of batch\_size) at once therefore it will take the mean of all values in those arrays to create a general loss.
+The trainable variables of the network are the \glspl{weight} and they get allocated to the container \lstinline{variables} on line six. Depending on the \glspl{weight} the loss differs. This implies, that in order to minimize the loss, the derivative with respect to the loss has to be calculated.  Which happens on line seven. Due to the special format of the \lstinline{tape} the rather simple subtraction has to be executed using \lstinline{optimizer.apply_gradients}, as it can be seen in line eight. \cite{tf.keras.optimizers}
 \section{Games}\label{sec:Games}
-In this section, the games used will be described in detail. As well as how the game was implemented into code and what the AI receives and outputs. All games use the same deep-q learning network, but just with different inputs, outputs, hidden layers and variables.
+In this section, the games used will be described in detail. As well as how the game was implemented into code and what the \gls{AI} receives and \glspl{output}. All games use the same deep-q learning network, but just with different  \glspl{input}, \glspl{output}, \glspl{hidden layer} and variables.
 \subsection{Tic-tac-toe}
 \subsubsection{Rules}
 Tic-tac-toe is a board game, in which two players can make a move in reciprocal succession. Moving in this game means to place a cross or naught in one of the nine fields. Which symbol each player has to place, is predefined and unalterable for the ongoing game. A field which is taken by any of the two denotation can't be used anymore. In order to win a player has to get three of the own symbols in a row, horizontally, vertically or diagonally. The game is over if one of the players wins or all fields are occupied by a sign, which means the game ended in a tie.
-\subsubsection{Implementation}
-The idea is, that the whole game takes place in an array of nine elements, representing the nine fields of tic-tac-toe. There's a function \lstinline{step()} which you can call to advance the game one step further. This function has the parameter \lstinline{action}. The outer function first asks the user which action to take and then calls \lstinline{step(action)} with \lstinline{action} being the index of the field the player chose. Then the step function will check if the move is valid, if so it will set a one at the index. After that it will choose a random move until it is encounters a valid move for the second player, only if the game is not done yet. The algorithm will set the number two at the respective index. Then the step function will output winner, if there is any, if it's done and what the current state is (array of nine fields).
+\subsubsection{Implementation}\label{sssec:impl}
+The idea is, that the whole game takes place in an array of nine elements, representing the nine fields of tic-tac-toe. There's a function \lstinline{step()} which you can call to advance the game one step further. This function has the parameter \lstinline{action}. The outer function first asks the user which action to take and then calls \lstinline{step(action)} with \lstinline{action} being the index of the field the player chose. Then the step function will check if the move is valid, if so it will set a one at the index. After that it will choose a move until it is encounters a valid move for the second player, only if the game is not done yet. The algorithm will set the number two at the respective index. Then the step function will output winner, if there is any, if it's done and what the current \gls{state} is (array of nine fields).
 \subsubsection{Interaction with the AI}
+In order to make an \gls{AI} which can play Tic-tac-toe some data has to be distributed in both directions. The game passes the current \gls{state} of the game to the network, which it will use to make a decision. This decision will be transferred back to the game itself, which will evaluate the new \gls{state} according to the rule given. Additionally an  \gls{input}, either from a player or the game itself,gets generated and gives this stated yielded back to the \gls{AI}. This happens as long as the game is not done. There are four opponents, which the game can provide for the network in order to learn. The first is a a real-life player. Although it is possible to train it that way, it is far slower than any computer equivalence. Depending on the agent, the game setting and the computational power,  a computer needs approximately $\frac{1}{15}$ of a second to complete a game. This can be done continuously without a break. Which makes it possible to simulate over $50'000$ games within an hour. The human counterpart is much slower and needs breaks. This is why in most cases the \gls{AI} won't be trained with this first option. The second option is an agent which takes purely random choices. This yields the advantages of being multiple times faster than any other computer generated opponent due to its simplicity. A bit more complex and therefore slower, is the \lstinline{mini max algorithm}, which is also known as the perfect strategy for Tic-tac-toe. The algorithm calculates from the current \gls{state} all possible outcomes and chooses the option which minimizes the opponents chance to win the most and  tries to maximize the own score, hence the name. In this training procedure the network can't win. The best score it can get is by achieving a draw. The last training method involves an duplicated \gls{neuronal network}. So network to be trained, learns from a network with the same structure, but evolves independently. In this case both networks try to beat each other. The data that the network receives is minimal. It gets the \gls{state} discussed in chapter \ref{sssec:impl} converted to a one hot encoded list. The generated action of the \gls{AI} is the location of its move, which gets passed on to the game.
 \subsection{Snake}
 \subsubsection{Rules}
 Snake is a single-player game, in which the player pilots a snake in a field with four walls. The field size in this case can be varied accordingly, but is usually set to a 20x20 grid. The goal is to survive as long as possible and gain length by eating randomly occurring apples. The game is over, if the player controls the snake in such a way, that it collides with itself or one of the borders of the game. There are certain versions which allow the transform this game in a multiplayer one. The same rules apply but one can also lose by colliding with the other snake.
@@ -863,12 +905,12 @@ The implementation is quite simple. The game consists of a 20x20 grid, so what h
 \end{lstlisting}
 So after each step a one-dimensional array with 400 zeros gets saved as \lstinline{self.field}. The apple then gets set at index \lstinline{self.apple}, which is represented as the number two. Then the array with the indices of the snake (\lstinline{self.snake}) gets iterated and at every index of snake, the field gets set to one representing the snakes body. Also after each step an action is read. This action then gets evaluated by checking if the snake is directly surrounding an object. If the snake heads in this direction, the game will be ended. If the snakes index of the head (last element of \lstinline{self.snake}) is equal to the index of the apple, no element gets deleted. Otherwise the first element gets deleted (last part of snake). Additionally, the index of the field where the snake is heading, is added to the list. This process runs until the player dies.
 \subsubsection{Interaction with the AI}
-TBD
+Unlike Tic-tac-toe the game snake has not several options to train, due to its structure which allows just one player. Additionally the data flow differs. The data has four \glspl{state}. One stands for above, two for right, three for below and four for the left direction. Multiple of the four numbers get allocated to the position of the apple, positioned obstacles and the direction the snake is heading. This gets one hot encoded and transmitted to the \gls{AI}. The data does not reveal how far away the apple is. For the obstacle this is indirectly known, due to the mechanism which only gets triggered when an obstacle is one unit away. So if an obstruction gets allocated to a direction, then its clear that this must be one unit away. 
 \subsection{Space Invaders}
 \subsubsection{Rules}
 Space invaders is the most complicated game of the three implemented. As in snake it's a single player game in which the player has to survive as long as possible. The competitor now controls a ship, which can move right and left. It also has the ability to fire upwards. The enemies are other spaceships which try to shoot the players ship. They have the same limitation, which means they can just move right, move left and fire downwards. There are many different versions, though in the following wording the implemented version is described. This adaptation is slightly simplified in order to make the implementation easier. Every shot costs an object one life, when it gets hit by the shot. The enemy spacecraft have one heart and the ship, which the players controls, three hearts. They come in three different levels and for every increase of level the chance of spawning gets smaller. Though the possibility of firing gets increased with the levels. When all the enemies are destroyed new one will be generated. The game is over when the player's ship gets demolished.
 \subsubsection{Implementation}
-As in the other games the essential data is saved in a matrix. Every element of it has a numerical value in the range from 0 to 9. Every number define the most important state as follows:
+As in the other games the essential data is saved in a matrix. Every element of it has a numerical value in the range from 0 to 9. Every number define the most important \gls{state} as follows:
 \begin{itemize}
 \item[0] nothing
 \item[1] player's ship
@@ -880,13 +922,13 @@ As in the other games the essential data is saved in a matrix. Every element of 
 \item[8] air
 \item[9] markers
 \end{itemize}
-The shapes of the objects are separately stored in matrices with the numbers listed before. A function sets different objects in the matrix at a certain position. This function is used to move object by calling it and passing on the position and the object. The center of every matrix is set to permanently to nine. This marks the center. In every processing step all the elements of the matrix are scanned for the nine. If one is found the position will be saved in a list. The next step is to identify what object the marker belongs to by looking around the marker for the numbers one to eight. The positions get assigned to a state and stored in three different lists, saving in the first the player, in the second the enemies and in the third the shots. All elements of the matrix get replaced by zero to reset it. Now depending on the input different actions get executed.
+The shapes of the objects are separately stored in matrices with the numbers listed before. A function sets different objects in the matrix at a certain position. This function is used to move object by calling it and passing on the position and the object. The center of every matrix is set to permanently to nine. This marks the center. In every processing step all the elements of the matrix are scanned for the nine. If one is found the position will be saved in a list. The next step is to identify what object the marker belongs to by looking around the marker for the numbers one to eight. The positions get assigned to a \gls{state} and stored in three different lists, saving in the first the player, in the second the enemies and in the third the shots. All elements of the matrix get replaced by zero to reset it. Now depending on the  \gls{input}, different actions get executed.
 If the player pressed the left-key or right-key the position of the ship gets just shifted left respectively right, if the field allows it.This by calling the function and adding or subtracting a certain value.If the move is not allowed this step gets skipped leaving the ship at the same position as before. If no movement is triggered the player can fire. Again the function is called and sets a players' bullet above the position of the competitor.
-In the next step the shots are getting moved by doing the same procedure as with the player's movement. If the state is a six, which means the projectile belongs to the enemies, the shot gets moved one position down. If it is a five it gets moved one upwards. Additionally it gets checked if a bullet is going to hit any object. If so the bullet gets deleted and one life subtracted from the spacecraft. When all opponents are demolished new ones get generated.This by calling a function which returns the level by a decreasing chance with increasing level. This random enemy gets allocated to a random position if there is space for it. This step can be made infinitely many as long as the player has more than zero lives.   
+In the next step the shots are getting moved by doing the same procedure as with the player's movement. If the \gls{state} is a six, which means the projectile belongs to the enemies, the shot gets moved one position down. If it is a five it gets moved one upwards. Additionally it gets checked if a bullet is going to hit any object. If so the bullet gets deleted and one life subtracted from the spacecraft. When all opponents are demolished new ones get generated.This by calling a function which returns the level by a decreasing chance with increasing level. This random enemy gets allocated to a random position if there is space for it. This step can be made infinitely many as long as the player has more than zero lives.   
 
 \subsubsection{Interaction with the AI}
 \section{Graphical User Interface}
-The GUI was implemented using pygame, when was structured object oriented. The most important variable for the functioning is \textit{self.currentScreenfunction}. It gets called multiple times per second and if the content gets changed the screen gets updated to the specified page. One way to change the screen functions is by using a button which has to be defined. The most screen functions are similar, thus the button example is representative for all the other ones. The following extract is a shortened version of the definition. All purely visual additions are excluded.
+The GUI was implemented using \lstinline{pygame}, when was structured object oriented. The most important variable for the functioning is \\ \lstinline{self.currentScreenfunction}. It gets called multiple times per second and if the content gets changed the screen gets updated to the specified page. One way to change the screen functions is by using a button which has to be defined. The most screen functions are similar, thus the button example is representative for all the other ones. The following extract is a shortened version of the definition. All purely visual additions are excluded.
 \lstinline{updateFieldVariable()} function:
 \begin{lstlisting}[language=Python, caption=Example - Definition of the button function]
     def addButton(self,x_center,y_center,w,h,action=None):
@@ -906,15 +948,15 @@ The GUI was implemented using pygame, when was structured object oriented. The m
                     self.currentScreenFunction = action
                 self.mouseDidPress = False
 \end{lstlisting}
-In the first line the name of the function is defined. The variables in the brackets have to plugged in in order to call the function without an error.  \textit{self} stands for the class, which is in this case pygame. It enables to use the properties defined by the class. The \textit{x\_center} and  \textit{y\_center} define where the button should be centered. The width and height are passed by the variables \textit{w} and  \textit{h}. The  \textit{action} allocates a specific function to the button. The \textit{None} enables to input nothing for this variable. If the function is called with just one variable less, than suggested in the definition, than the value of this variable will be None.In the variable \textit{mouse} the position of the cursor is saved. In the next step the x and y-positions get calculated in order to use the function \textit{pygame.rect}. This function draws a rectangle and require that the position is defined by the upper left corner, not in the center as the button function demands. The if-statement checks if the cursor is within the button. If this is the case,the mouse gets pressed and the action is not None, it looks what the content of the variable \textit{message} is. If the message is previous the \textit{self.page} variable gets subtracted by one. If its next one gets added. When both cases don't occur, the \textit{self.currentScreenfunction} is set to the action saved in this variable. Changing \textit{self.currentScreenFunction} to False prevents the button to be pressed multiple times before the action can be executed.
+In the first line the name of the function is defined. The variables in the brackets have to plugged in in order to call the function without an error.  \lstinline{self} stands for the class, which is in this case pygame. It enables to use the properties defined by the class. The \lstinline{x\_center} and  \lstinline{y\_center} define where the button should be centered. The width and height are passed by the variables \lstinline{w} and  \lstinline{h}. The  \lstinline{action} allocates a specific function to the button. The \lstinline{None} enables to  \gls{input} nothing for this variable. If the function is called with just one variable less, than suggested in the definition, than the value of this variable will be None.In the variable \lstinline{mouse} the position of the cursor is saved. In the next step the x and y-positions get calculated in order to use the function \lstinline{pygame.rect}. This function draws a rectangle and require that the position is defined by the upper left corner, not in the center as the button function demands. The if-statement checks if the cursor is within the button. If this is the case,the mouse gets pressed and the action is not None, it looks what the content of the variable \lstinline{message} is. If the message is previous the \lstinline{self.page} variable gets subtracted by one. If its next one gets added. When both cases don't occur, the \lstinline{self.currentScreenfunction} is set to the action saved in this variable. Changing \lstinline{self.currentScreenFunction} to False prevents the button to be pressed multiple times before the action can be executed.
 
 \section{Results}
-To give an overview over the results all data gets stored in files. if necessary this stored information can be plotted into a graphic using \textit{matplotlib}. The results of the following chapter are visualized by this library for python.
+To give an overview over the results all data gets stored in files. if necessary this stored information can be plotted into a graphic using \gls{matplotlib}. The results of the following chapter are visualized by this library for python.
 \subsection{Tic-tac-toe}
 \subsubsection{Expected random win rate}
-Win rate describes the amount of the games won by the AI in percent.
+Win rate describes the amount of the games won by the \gls{AI} in percent.
 In order to distinguish random choices from a well-planned actions the probability of winning has to be determined. Thus yielding the expected win rate from an agent which takes purely random actions.
-The solution shown was discovered by \textit{Marcello Cammarata} \cite{tic_tac_toe_prob}. 
+The solution shown was discovered by Marcello Cammarata.  \cite{tic_tac_toe_prob} 
 \\ The only fact which is important is which player starts. But if naught or cross begins is irrelevant. To make it simpler one can assume that cross starts. There are in total $9$ fields in Tic-tac-toe. The player that starts can at most occupy $5$ positions and the second with $4$. The natural question now is to ask in how many ways can this $5$ crosses be distributed in the 9 fields. One position can only be claimed once. This can be calculated using the formula for combinations without repetition.\cite{comb}
 \begin{equation}\nonumber
     C^{5}_{9} = \frac{9!}{5!(9-5)!} = 126
@@ -928,7 +970,7 @@ By looking which player completes first the triad, the amount of wins for both p
     \item [3.]{X completes at 4th draw, O completes at 4th move}
     \item [4.]{O completes at 4th draw, X completes at 5th move}
 \end{itemize}
-For the first two cases the amount can be determined by counting how many configurations are in such a way that this state is achieved. In general the amount is determined by the product of the ways the triad can be distributed and it's frequency. The frequency is equal to the configurations possible for the later win of the other player. When $n$ denotes the round, the amount can be mathematically described as a formula.
+For the first two cases the amount can be determined by counting how many configurations are in such a way that this \gls{state} is achieved. In general the amount is determined by the product of the ways the triad can be distributed and it's frequency. The frequency is equal to the configurations possible for the later win of the other player. When $n$ denotes the round, the amount can be mathematically described as a formula.
 \begin{equation}
    Win_{x} = C_{2}^{n-1} \cdot \left ( \sum _{i = 0}^{5 - n} C_{4-i}^{2} \right )
  \end{equation}
@@ -955,17 +997,18 @@ Finally, the chance that none of the players win is the rest or:
 \begin{equation}\nonumber
 \frac{16}{126} = 0.126875
 \end{equation}
-In order to determine an improvement of the AI one should see the win rate of approximately $ 60\% $ in the beginning and increasing over time. If the AI does not learn properly the win rate should be sticking around this combinatorical value.
+In order to determine an improvement of the \gls{AI} one should see the win rate of approximately $ 60\% $ in the beginning and increasing over time. If the \gls{AI} does not learn properly the win rate should be sticking around this combinatorical value.
 \subsubsection{Achieved winrate}
 \subsection{Snake}
-In contrast to Tic-tac-toe an improvement of an AI playing snake can be easily be spotted because the score of a random agent would be approximately $0$. The chance of accidentally crossing the spot of an apple and simultaneously have survived for that long is fairly small.   
+In contrast to Tic-tac-toe an improvement of an \gls{AI} playing snake can be easily be spotted because the score of a random agent would be approximately $0$. The chance of accidentally crossing the spot of an apple and simultaneously have survived for that long is fairly small.   
 \subsubsection{Achieved score}
 \subsection{Space Invaders}
-As with snake an improvement of the AI is easy to spot in space invaders and its therefore obsolete to calculate the probability. 
+As with snake an improvement of the \gls{AI} is easy to spot in space invaders and its therefore obsolete to calculate the probability. 
 \subsubsection{Achieved score}
+\section{Discussion}
 \section{Conclusion}
-\section{Glossary}
-
+\clearpage
+\printglossaries
 \bibliographystyle{unsrt}
 \newpage
 \bibliography{main}
