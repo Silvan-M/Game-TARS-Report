@@ -6,13 +6,25 @@
   name={deep learning},
   description={Type of \gls{machine learning} AI which utilises  \glspl{neuronal network}}
 }
-\newglossaryentry{Narrow AI}{%
-  name={narrow AI},
-  description={The typical AI we encounter everyday, it's very good at a certain task}
+\newglossaryentry{artificial narrow intelligence}{%
+  name={artificial narrow intelligence},
+  description={The typical \gls{AI} we encounter everyday, it's very good at a certain task, but can only perform this task}
+}
+\newglossaryentry{artificial general intelligence}{%
+  name={artificial general intelligence},
+  description={Type of \gls{AI}, that can perform all tasks a human can perform}
+}
+\newglossaryentry{artificial super intelligence}{%
+  name={artificial super intelligence},
+  description={Type of \gls{AI} which is superior to the human brain and can perform all tasks a human is capable of}
 }
 \newglossaryentry{neuronal network}{%
   name={neuronal network},
   description={Algorithm which mimics the brains capability to learn. Also known as artificial neuronal network (\gls{ANN})}
+}
+\newglossaryentry{iteration}{%
+  name={iteration},
+  description={In programming referred to as the amount of cycles a program goes through}
 }
 \newglossaryentry{ANN}{%
   name={ANN},
@@ -20,7 +32,7 @@
 }
 \newglossaryentry{neuron}{%
   name={neuron},
-  description={A junction, which generates an \gls{output} with a given \gls{input}. The term can refer to the biological junction and its abstracted mathematical model}
+  description={A junction, which generates an \gls{output} by a given \gls{input}. The term can refer to a biological junction and its abstracted mathematical model}
 }
 \newglossaryentry{input}{%
   name={input},
@@ -28,7 +40,7 @@
 }
 \newglossaryentry{input layer}{%
   name={input layer},
-  description={The \gls{layer} of a \gls{neuronal network} the information gets first}
+  description={The \gls{layer} of a \gls{neuronal network} where one inputs the information for the AI to train}
 }
 \newglossaryentry{output layer}{%
   name={output layer},
@@ -36,48 +48,48 @@
 }
 \newglossaryentry{activation function}{%
   name={activation function},
-  description={A functions which generates the output in a \gls{neuron} with the summed up weighted inputs}
+  description={A function, which generates the output in a \gls{neuron} by the summed up weighted inputs}
 }
 \newglossaryentry{TargetNet}{%
   name={TargetNet},
-  description={One of the two \glspl{neuronal network} in the \gls{DQN} model. Structural identical to the \gls{TrainNet}, which get updated every certain step defined by \gls{copy step}. For further details look in chapter \ref{sssec:copy_step}}
+  description={One of the two \glspl{neuronal network} in the \gls{DQN} model. Structurally identical to the \gls{TrainNet}, which get updated every certain step defined by \gls{copy step}. For further details look chapter \ref{sssec:copy_step}}
 }
 \newglossaryentry{AI}{%
   name={AI},
-  description={Abbreviation for \gls{Artificial Intelligence}}
+  description={Abbreviation for \gls{artificial intelligence}}
 }
 \newglossaryentry{copy step}{%
   name={copy step},
-  description={The variable defines in which frequency the \gls{TargetNet} should be updated. For further details look in chapter \ref{sssec:copy_step}}
+  description={The variable defines in which frequency the \gls{TargetNet} should be updated. For further details read chapter \ref{sssec:copy_step}}
 }
-\newglossaryentry{Artificial Intelligence}{%
-  name={Artificial Intelligence},
-  description={The  ability  of  a  digital  device  to execute tasks which are related to human beings and animals.}
+\newglossaryentry{artificial intelligence}{%
+  name={artificial intelligence},
+  description={The  ability  of  a  digital  device  to execute tasks, which are related to human beings and animals.}
 }
 \newglossaryentry{TrainNet}{%
   name={TrainNet},
-  description={One of the two \glspl{neuronal network} in the \gls{DQN} model. The TrainNet decides which action should be taken. For further details look in chapter \ref{sssec:copy_step}}
+  description={One of the two \glspl{neuronal network} in the \gls{DQN} model. The TrainNet decides which action should be taken. For further details look chapter \ref{sssec:copy_step}}
 }
 \newglossaryentry{layer}{%
   name={neuronal layer},
-  description={The structure multiple \glspl{neuron} build up with the property that all neurons, which are part of this layer, connect with all other neurons from the previous and following layers}
+  description={The structure multiple \glspl{neuron} build up. It has the property that all neurons, which are part of this layer, connect with all other neurons from the previous and following layers}
 }
 
 \newglossaryentry{vector}{%
   name={vector},
-  description={A mathematical concept which can describes the relative position of a point to another. In the machine learning context a vector is a way to condense the information of a layer into a mathematical object}
+  description={A mathematical concept which describes the relative position of a point to another. In the machine learning context a vector is a way to condense the information of a layer into a mathematical object}
 }
 \newglossaryentry{net value}{%
-  name={net value },
-  description={$[net]$ The value which a \gls{neuron} produces before it gets forwarded to the activation function}
+  name={net value},
+  description={$[net]$ The value which a \gls{neuron} produces, before it gets forwarded to the activation function}
 }
 \newglossaryentry{input size}{%
-  name={input layer size },
+  name={input layer size},
   description={$[n]$ The amount of states which are used to process the incoming data}
 }
 \newglossaryentry{weight}{%
-  name={weight },
-  description={$[w]$ A factor which the input gets multiplied with. The weights change in order to approximate the target values as close as possible }
+  name={weight},
+  description={$[w]$ A factor which the input gets multiplied with. The weights change to approximate the target values as close as possible}
 }
 \newglossaryentry{hidden layer}{%
   name={hidden layer},
@@ -88,28 +100,32 @@
   description={A synonym for \gls{hidden layer}}
 }
 \newglossaryentry{amount of hidden layers}{%
-  name={amount of hidden layers },
-  description={$[a]$ The amount of \glspl{hidden layer} which get stacked after each other}
+  name={amount of hidden layers},
+  description={$[a]$ The amount which defines how many \glspl{hidden layer} get stacked after each other}
 }
 \newglossaryentry{output layer size}{%
-  name={output layer size },
-  description={$[m]$ The amount of states which are used to describe the every possible action}
+  name={output layer size},
+  description={$[m]$ The amount of states which are used to describe every action the agent can take}
 }
 \newglossaryentry{scalar product}{%
   name={scalar product},
-  description={A scalar product, or also known as dot product, allocates to two \glspl{vector} a numerical value. This number can be used to determine the angle between the input \glspl{vector} }
+  description={A scalar product, or also known as dot product. It allocates a numerical value to two \glspl{vector}. This number can be used to determine the angle between the input \glspl{vector}}
 }
 \newglossaryentry{size}{%
-  name={layer size },
+  name={layer size},
   description={$[s]$ Describes the amount of \glspl{neuron} in a \gls{layer}}
 }
 \newglossaryentry{tensor}{%
   name={tensor},
-  description={Tensor is a quantity which can classify scalars, \glspl{vector} or analogue objects in a unified schema so it can describe mathematical or physical processes. Tensors are often used by the library \lstinline{tensorflow} in order to make the calculations}
+  description={Tensor is a quantity which can classify scalars, \glspl{vector} or analogue objects in a unified schema. Tensors are often used by the library \lstinline{tensorflow} to make calculations}
+}
+\newglossaryentry{regression}{%
+  name={regression},
+  description={A regression is a way to approximate data in a function to determine its tendencies.}
 }
 \newglossaryentry{back propagation}{%
-  name={back propagation},
-  description={Backpropagation computes the gradient of the loss function with respect to the weights of the network for a single input–output example, and does so efficiently, unlike a naive direct computation of the gradient with respect to each weight individually.\cite{Backpropagation} }
+  name={backpropagation},
+  description={Backpropagation computes the gradient of the loss function with respect to the weights of the network. This for a single input–output example. It does so efficiently, unlike a naive direct computation of the gradient, with respect to each weight individually.\cite{Backpropagation}}
 }
 \newglossaryentry{sigmoid neuron}{%
   name={sigmoid neuron},
@@ -117,27 +133,27 @@
 }
 \newglossaryentry{optimization}{%
   name={optimization},
-  description={The process of improving the \gls{AI} by changing the \glspl{weight} }
+  description={The process of improving the \gls{AI} by changing the \glspl{weight}}
 }
 \newglossaryentry{output}{%
-  name={output },
+  name={output},
   description={$[o]$ The final output of the neuron, after being passed to the activation function}
 }
 \newglossaryentry{convergence}{%
   name={convergence},
-  description={In the context of \gls{neuronal network} it describes the behaviour of two functions such that the difference of their value get increasingly smaller}
+  description={In the context of \glspl{neuronal network}, it describes the behaviour of two functions such that the difference of their value get increasingly smaller}
 }
 \newglossaryentry{divergence}{%
   name={divergence},
-  description={In the context of \gls{neuronal network} it describes the behaviour of two functions such that the difference of their value get increasingly larger}
+  description={In the context of \glspl{neuronal network}, it describes the behaviour of two functions, such that the difference of their value get increasingly larger}
 }
 \newglossaryentry{gradient}{%
-  name={gradient descent $[\triangledown]$},
+  name={gradient descent},
   description={The gradient describes the slope of multidimensional functions. The negative slope points in the direction with the fastest \gls{convergence}}
 }
 \newglossaryentry{minimum}{%
   name={minimum},
-  description={The point of a function where the lowest y-value is achieved. There are two types of minima. The global minimum yields the lowest value for the whole function. A local minimum however achieves this just locally}
+  description={The point of a function where the lowest y-value is achieved. There are two types of minima. The global minimum yields the lowest value for the whole function. A local minimum however achieves this just in close range}
 }
 \newglossaryentry{environment}{%
   name={environment},
@@ -157,15 +173,15 @@
 }
 \newglossaryentry{ReLU}{%
   name={Rectified linear unit (ReLU)},
-  description={An activation function which is used in a neuron. The function is piecewise linear. The output of the function yields 0 until a certain threshold is reached. After this point the function is linear. It is mostly used in \glspl{hidden layer}}
+  description={An activation function which is used in a neuron. The function is piecewise linear. The output of the function yields 0, until a certain threshold is reached. After this point the function is linear. It is mostly used in \glspl{hidden layer}}
 }
 \newglossaryentry{target}{%
   name={target},
-  description={The target defines numerically what the  \gls{neuronal network} has to strive for. It is used to make a learning possible and lead it in a certain direction}
+  description={The target numerically defines what the  \gls{neuronal network} has to strive for. It is used to make learning possible and lead it in a certain direction}
 }
 \newglossaryentry{learning rate}{%
-  name={learning rate },
-  description={$[\alpha]$ Factor which defines how drastically weights should change each train step. For further details look in chapter \ref{sec:nnmath} or \ref{sssec:alpha}}
+  name={learning rate},
+  description={$[\alpha]$ Factor which defines how drastically weights should change each train step. For further details read chapter \ref{sec:nnmath} or \ref{sssec:alpha}}
 }
 \newglossaryentry{policy}{%
   name={policy},
@@ -173,19 +189,23 @@
 }
 \newglossaryentry{Markov decision process}{%
   name={Markov decision process},
-  description={Model which describes decision making by observing an environment and reacting upon it with an action}
+  description={Model which describes decision making, by observing an environment and reacting upon it, with an action}
+}
+\newglossaryentry{episode}{%
+  name={episode},
+  description={The machine learning terminology usually referred to as \gls{iteration} in informatics. More specifically defining one round, or in \gls{reinforcement learning} one game}
 }
 \newglossaryentry{Q-learning}{%
   name={Q-learning},
   description={Utilising a Q-table to determine the most beneficial action}
 }
 \newglossaryentry{Deep Q-learning}{%
-  name={Deep Q-learning},
+  name={deep Q-learning},
   description={Approximating the Q-table used in \gls{Q-learning} by applying \gls{deep learning}}
 }
 \newglossaryentry{off-policy}{%
   name={off-policy},
-  description={\Gls{reinforcement learning} algorithm which learns from actions which are located outside of it's policy}
+  description={Deep learning algorithm which learns from actions which are located outside of its policy}
 }
 \newglossaryentry{alpha}{%
   name={alpha},
@@ -193,11 +213,11 @@
 }
 \newglossaryentry{experience}{%
   name={experience},
-  description={Also known as memory, defines all states, actions, new states and rewards a agent has encountered. For further details look in chapter \ref{sssec:copy_step}}
+  description={Also known as memory. Defines all states, actions, new states and rewards a agent has encountered. For further details read chapter \ref{sssec:copy_step}}
 }
 \newglossaryentry{memory}{%
   name={memory},
-  description={Also known as experience, defines all states, actions, new states and rewards a agent has encountered. For further details look in chapter \ref{sssec:copy_step}}
+  description={Also known as experience, defines all states, actions, new states and rewards a agent has encountered. For further details look chapter \ref{sssec:copy_step}}
 }
 \newglossaryentry{reward}{%
   name={reward},
@@ -205,11 +225,19 @@
 }
 \newglossaryentry{min experience}{%
   name={min experience},
-  description={This variable defines what the threshold is that the \gls{neuronal network} begins to learn. For further details look in chapter \ref{sssec:copy_step}}
+  description={This variable defines what the threshold is, that the \gls{neuronal network} begins to learn. For further details read chapter \ref{sssec:copy_step}}
+}
+\newglossaryentry{computational power}{%
+  name={computational power},
+  description={Calculation powers of a computer. Usually refers to the capability of computers, to deal with high amounts of complex calculations}
+}
+\newglossaryentry{min max algorithm}{%
+  name={min max algorithm},
+  description={A type of algorithm yielding the optimal decision an agent can take. It calculates all possibilities, to find the most beneficial one}
 }
 \newglossaryentry{max experience}{%
   name={max experience},
-  description={This variable defines how many information should be saved in the \gls{memory}. For further details look in chapter \ref{sssec:copy_step}}
+  description={This variable defines how much information should be saved in the \gls{memory}. For further details read chapter \ref{sssec:copy_step}}
 }
 \newglossaryentry{DQN}{%
   name={DQN},
@@ -221,15 +249,19 @@
 }
 \newglossaryentry{exploration}{%
   name={exploration},
-  description={When the AI takes random action in order to discover inexperienced possibilities}
+  description={When the AI takes random action, to discover inexperienced possibilities}
 }
 \newglossaryentry{exploration rate}{%
   name={exploration rate},
-  description={$[\epsilon]$When the AI takes random action in order to discover inexperienced possibilities}
+  description={$[\epsilon]$ When the AI takes random action, to discover inexperienced possibilities}
 }
 \newglossaryentry{exploitation}{%
   name={exploitation},
   description={The act of taking the most beneficial action, also known as the \gls{greedy action}}
+}
+\newglossaryentry{batch size}{%
+  name={batch size},
+  description={A variable which defines the amount of previous inputs that get processed at every time step. By increasing this value, one can raise a sense of motion}
 }
 \newglossaryentry{greedy action}{%
   name={greedy action},
@@ -245,23 +277,23 @@
 }
 \newglossaryentry{state}{%
   name={state},
-  description={Output of a \gls{environment}}
+  description={Output of a \gls{environment} describing its current status}
 }
 \newglossaryentry{CartPole}{%
   name={CartPole},
-  description={A prime example of  \gls{machine learning}, the task is to balance a pole on a cart which can be moved along a horizontal rail}
+  description={A prime example of  \gls{machine learning}. The task is, to balance a pole on a cart, which can be moved along a horizontal rail}
 }
 \newglossaryentry{low-level}{%
   name={low-level},
   description={Level of programming which is close to the processor}
 }
-\newglossaryentry{one hot encoding}{%
-  name={one hot encoding},
-  description={A method to quantify categorical data, which produces a vector with the length of the data sat and 0 and 1 as elements.For further details look in chapter \ref{ssec:DQN} }
+\newglossaryentry{one-hot encoding}{%
+  name={one-hot encoding},
+  description={A method to quantify categorical data. It produces a vector with the length of the data set and 0 and 1 as elements. For further details look chapter \ref{ssec:DQN}}
 }
 \newglossaryentry{gamma}{%
-  name={gamma },
-  description={$[\gamma]$ Gamma determines the importance of future rewards by acting as a factor from 0 to 1. For further details look in chapter \ref{sssec:gamma}}
+  name={gamma},
+  description={$[\gamma]$ Gamma determines the importance of future rewards by acting as a factor from 0 to 1. For further details read chapter \ref{sssec:gamma}}
 }
 \newglossaryentry{headless}{%
   name={headless},
@@ -269,5 +301,5 @@
 }
 \newglossaryentry{matplotlib}{%
   name={matplotlib},
-  description={A library for creating static, animated, and interactive visualizations in Python}
+  description={A library for creating static, animated and interactive visualizations in Python}
 }
